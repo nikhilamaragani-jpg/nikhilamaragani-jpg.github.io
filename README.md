@@ -1,7 +1,6 @@
-# Amaragani Nikhil Sai — Live Portfolio
+# Amaragani Nikhil Sai — Portfolio (primary site)
 
-**https://nikhilamaragani-jpg.github.io/**
+**Live:** https://nikhilamaragani-jpg.github.io/
 
-Elite single-page portfolio for recruiters (HR, tech, international, sponsorship-aware).
-
-Mirror repo: [portfolio](https://github.com/nikhilamaragani-jpg/portfolio)
+This is the **main public portfolio**.  
+The separate [`portfolio`](https://github.com/nikhilamaragani-jpg/portfolio) repository is only a code mirror / optional deploy source — prefer linking this user site everywhere.
