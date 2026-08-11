@@ -3,186 +3,190 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Amaragani Nikhil Sai | Software · AI · Portfolio</title>
-  <meta name="description" content="Amaragani Nikhil Sai — B.Tech CSE graduate (2026). Applied AI, machine learning, and practical systems with clean engineering and clear documentation." />
+  <title>Amaragani Nikhil Sai | Portfolio</title>
+  <meta name="description" content="Amaragani Nikhil Sai — B.Tech CSE graduate (2026). Applied AI, machine learning, and practical systems. Clean design. Solid engineering." />
   <meta name="author" content="Amaragani Nikhil Sai" />
   <meta name="theme-color" content="#0A101F" />
-  <meta property="og:title" content="Amaragani Nikhil Sai | Portfolio" />
-  <meta property="og:description" content="Clean engineering. Practical AI. Projects you can run." />
+  <meta property="og:title" content="Amaragani Nikhil Sai — Portfolio" />
+  <meta property="og:description" content="Projects, skills, and systems built with curiosity and craft." />
   <meta property="og:url" content="https://nikhilamaragani-jpg.github.io/" />
   <meta property="og:type" content="website" />
   <link rel="canonical" href="https://nikhilamaragani-jpg.github.io/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="bg-glow" aria-hidden="true"></div>
-  <a class="skip" href="#main">Skip to content</a>
+  <div id="particles" aria-hidden="true"></div>
 
-  <header class="nav">
-    <div class="wrap nav-inner">
-      <a class="brand" href="#home">NIKHIL<span>SAI</span></a>
-      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span></button>
-      <nav id="menu">
-        <a href="#about">About</a>
-        <a href="#education">Education</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#experience">Experience</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <a class="btn btn-sm" href="https://github.com/nikhilamaragani-jpg" target="_blank" rel="noopener">GitHub</a>
-    </div>
+  <header class="site-nav">
+    <a class="logo" href="#home">Nikhil <span>Sai</span></a>
+    <button class="nav-btn" id="navBtn" aria-label="Open menu" type="button"><i></i><i></i><i></i></button>
+    <nav id="nav">
+      <a href="#home" data-nav>Home</a>
+      <a href="#about" data-nav>About</a>
+      <a href="#education" data-nav>Education</a>
+      <a href="#skills" data-nav>Skills</a>
+      <a href="#projects" data-nav>Projects</a>
+      <a href="#experience" data-nav>Experience</a>
+      <a href="#contact" data-nav>Contact</a>
+    </nav>
   </header>
 
-  <main id="main">
+  <main>
     <!-- HOME -->
-    <section class="hero" id="home">
-      <div class="wrap hero-grid">
-        <div>
-          <p class="kicker">Hello — welcome to my portfolio</p>
-          <h1>Amaragani <em>Nikhil Sai</em></h1>
-          <p class="role">B.Tech CSE · Applied AI &amp; Machine Learning · Graduated 2026</p>
-          <p class="lead">
-            I like turning ideas into systems people can actually run.
-            Clean structure. Honest scope. Details that make the experience clear.
-            This site is a window into the projects I've built and the skills I'm sharpening.
-          </p>
-          <div class="cta-row">
-            <a class="btn" href="#projects">Explore projects</a>
-            <a class="btn btn-ghost" href="mailto:nikhilamaragani@gmail.com">Get in touch</a>
-          </div>
+    <section class="panel home" id="home">
+      <div class="panel-inner home-inner">
+        <p class="welcome">Hello, welcome to</p>
+        <h1 class="title-xl">Amaragani Nikhil Sai<br/><span>Portfolio</span></h1>
+        <p class="home-lead">
+          Hi there — I'm a builder who likes creating things that not only work, but feel clear to use.
+          I work across applied AI and machine learning: turning ideas into modular demos, solid structure, and documentation you can follow.
+          This portfolio is a window into projects I've shipped, skills I'm sharpening, and the craft that keeps me learning.
+          Thanks for stopping by.
+        </p>
+        <div class="home-actions">
+          <a class="btn" href="#projects">View projects</a>
+          <a class="btn outline" href="https://github.com/nikhilamaragani-jpg" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn outline" href="mailto:nikhilamaragani@gmail.com">Email</a>
         </div>
-        <aside class="glass card-hero">
-          <p class="card-label">At a glance</p>
-          <ul class="facts">
-            <li><span>Degree</span><strong>B.Tech CSE</strong></li>
-            <li><span>College</span><strong>SIIET · JNTUH</strong></li>
-            <li><span>Graduated</span><strong>2026</strong></li>
-            <li><span>CGPA</span><strong>6.9 / 10</strong></li>
-            <li><span>Focus</span><strong>AI · ML · Detection</strong></li>
-            <li><span>Base</span><strong>Hyderabad, India</strong></li>
-          </ul>
-          <a class="text-link" href="https://github.com/nikhilamaragani-jpg" target="_blank" rel="noopener">github.com/nikhilamaragani-jpg →</a>
-        </aside>
+        <div class="home-meta">
+          <span>B.Tech CSE</span>
+          <span>Graduated 2026</span>
+          <span>CGPA 6.9</span>
+          <span>Hyderabad</span>
+        </div>
       </div>
     </section>
 
     <!-- ABOUT -->
-    <section class="section" id="about">
-      <div class="wrap">
-        <p class="section-tag">01 — About</p>
-        <h2>Who I am</h2>
-        <div class="split">
+    <section class="panel" id="about">
+      <div class="panel-inner two">
+        <div>
+          <p class="eyebrow">About me</p>
+          <h2>Who am I?</h2>
           <p>
-            I'm someone who enjoys the path from <strong>problem → design → working demo</strong>.
-            Whether it's a chatbot that answers tourism questions or a classifier that flags risky accounts,
-            I like solving from both a logical and practical angle.
+            I enjoy turning ideas into experiences people can actually run.
+            Whether it's a tourism chatbot or a classification pipeline, I like solving from both a creative and logical angle.
           </p>
           <p>
-            Great work comes from curiosity, clear communication, and continuous learning —
-            values that shape how I document and ship projects.
-            Collaboration and honest scoping matter as much as the stack.
+            Collaboration and curiosity shape how I work. Great products come from empathy, clarity, and the drive to keep learning — values behind every project here.
           </p>
         </div>
-        <div class="stat-row">
-          <div class="stat glass"><strong>4</strong><span>Core B.Tech projects</span></div>
-          <div class="stat glass"><strong>2</strong><span>AI training programs</span></div>
-          <div class="stat glass"><strong>1</strong><span>Industry-mentored mini project</span></div>
-          <div class="stat glass"><strong>∞</strong><span>Still learning</span></div>
+        <div class="counter-grid">
+          <div class="counter"><strong>4</strong><span>Core projects</span></div>
+          <div class="counter"><strong>2</strong><span>AI trainings</span></div>
+          <div class="counter"><strong>1</strong><span>Industry mini project</span></div>
+          <div class="counter"><strong>∞</strong><span>Still learning</span></div>
         </div>
       </div>
     </section>
 
     <!-- EDUCATION -->
-    <section class="section alt" id="education">
-      <div class="wrap">
-        <p class="section-tag">02 — Education</p>
-        <h2>Where I studied</h2>
-        <div class="edu-grid">
-          <article class="glass edu">
-            <p class="edu-level">Bachelor of Technology</p>
-            <h3>Computer Science &amp; Engineering</h3>
-            <p class="muted">Sri Indu Institute of Engineering and Technology (JNTUH)</p>
-            <p class="edu-meta"><strong>Graduated 2026</strong> · CGPA <strong>6.9 / 10</strong></p>
-            <p class="fine">DSA · OOP · DBMS · OS · Networks · Python · AI · Machine Learning</p>
+    <section class="panel soft" id="education">
+      <div class="panel-inner">
+        <p class="eyebrow">Education</p>
+        <h2>Where did I study?</h2>
+        <div class="edu-cards">
+          <article class="card">
+            <h3>Bachelor of Technology — CSE</h3>
+            <p class="muted">Sri Indu Institute of Engineering and Technology (JNTUH), Hyderabad</p>
+            <p class="accent"><strong>Graduated 2026</strong> · CGPA <strong>6.9 / 10</strong></p>
+            <p class="fine">DSA · OOP · DBMS · OS · Networks · Python · AI · ML</p>
           </article>
-          <article class="glass edu">
-            <p class="edu-level">Intermediate (MPC)</p>
-            <h3>Telangana State Board</h3>
-            <p class="edu-meta">Total marks <strong>784</strong></p>
+          <article class="card">
+            <h3>Intermediate (MPC)</h3>
+            <p class="muted">Telangana State Board</p>
+            <p class="accent">Total marks <strong>784</strong></p>
           </article>
-          <article class="glass edu">
-            <p class="edu-level">SSC</p>
-            <h3>Secondary education</h3>
-            <p class="edu-meta">CGPA <strong>9.3 / 10</strong></p>
+          <article class="card">
+            <h3>SSC</h3>
+            <p class="muted">Secondary education</p>
+            <p class="accent">CGPA <strong>9.3 / 10</strong></p>
           </article>
         </div>
       </div>
     </section>
 
     <!-- SKILLS -->
-    <section class="section" id="skills">
-      <div class="wrap">
-        <p class="section-tag">03 — Skills</p>
-        <h2>What I work with</h2>
-        <div class="skills">
-          <div class="glass skill"><h3>Languages</h3><p>Python, SQL, Java (basic), C (basic)</p></div>
-          <div class="glass skill"><h3>ML &amp; AI</h3><p>scikit-learn, NLP/chatbots, RAG-style retrieval, classification, CV concepts</p></div>
-          <div class="glass skill"><h3>Data</h3><p>Pandas, NumPy, feature engineering, evaluation, Power BI</p></div>
-          <div class="glass skill"><h3>Engineering</h3><p>Git, GitHub, modular Python, FastAPI demos, Docker demos, SQLite</p></div>
-          <div class="glass skill"><h3>Core CS</h3><p>DSA, OOP, DBMS, Operating Systems, Computer Networks</p></div>
-          <div class="glass skill"><h3>Soft skills</h3><p>Problem solving, documentation, presentations, teamwork</p></div>
+    <section class="panel" id="skills">
+      <div class="panel-inner">
+        <p class="eyebrow">My skills</p>
+        <h2>What am I good at?</h2>
+        <div class="skill-board">
+          <div class="skill-col">
+            <h3>Languages</h3>
+            <div class="chips"><span>Python</span><span>SQL</span><span>Java (basic)</span><span>C (basic)</span></div>
+          </div>
+          <div class="skill-col">
+            <h3>ML &amp; AI</h3>
+            <div class="chips"><span>scikit-learn</span><span>NLP / Chatbots</span><span>RAG-style retrieval</span><span>Classification</span><span>CV concepts</span></div>
+          </div>
+          <div class="skill-col">
+            <h3>Data</h3>
+            <div class="chips"><span>Pandas</span><span>NumPy</span><span>Feature engineering</span><span>Evaluation</span><span>Power BI</span></div>
+          </div>
+          <div class="skill-col">
+            <h3>Engineering</h3>
+            <div class="chips"><span>Git</span><span>GitHub</span><span>FastAPI</span><span>Docker</span><span>SQLite</span><span>Modular Python</span></div>
+          </div>
+          <div class="skill-col">
+            <h3>Core CS</h3>
+            <div class="chips"><span>DSA</span><span>OOP</span><span>DBMS</span><span>OS</span><span>Networks</span></div>
+          </div>
+          <div class="skill-col">
+            <h3>Soft skills</h3>
+            <div class="chips"><span>Problem solving</span><span>Documentation</span><span>Presentations</span><span>Teamwork</span></div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- PROJECTS -->
-    <section class="section alt" id="projects">
-      <div class="wrap">
-        <p class="section-tag">04 — Projects</p>
+    <section class="panel soft" id="projects">
+      <div class="panel-inner">
+        <p class="eyebrow">Projects</p>
         <h2>Design explorations</h2>
-        <p class="sub">I like understanding the <em>why</em> before the <em>how</em> — then shipping something you can run.</p>
-        <div class="projects">
-          <article class="glass project featured">
-            <div class="tags"><span>Major · 2025–26</span><span>Flagship</span></div>
+        <p class="section-lead">I like understanding the <em>why</em> before the <em>how</em> — then building something that makes sense.</p>
+        <div class="project-grid">
+          <article class="project big">
+            <div class="project-top"><span class="badge">Major · 2025–26</span><span class="badge glow">Flagship</span></div>
             <h3>Smart Tourism Chatbot</h3>
-            <p>Conversational assistant for tourism support — RAG-style retrieval, intent routing, FastAPI + CLI, SQLite history, Docker. Academic report covers 6A tourism framing and full system design; the repo is the offline runnable core.</p>
-            <div class="pills"><span>Python</span><span>FastAPI</span><span>NLP</span><span>Docker</span></div>
-            <div class="links">
+            <p>Conversational AI for tourism support — RAG-style retrieval, intent routing, FastAPI + CLI, SQLite logging, Docker. Academic depth in the report; runnable core on GitHub.</p>
+            <div class="chips"><span>Python</span><span>FastAPI</span><span>NLP</span><span>Docker</span></div>
+            <div class="project-links">
               <a href="https://github.com/nikhilamaragani-jpg/ai-driven-chatbot-smart-tourism" target="_blank" rel="noopener">Code</a>
               <a href="https://github.com/nikhilamaragani-jpg/ai-driven-chatbot-smart-tourism/blob/main/docs/DEMO.md" target="_blank" rel="noopener">Demo</a>
               <a href="https://github.com/nikhilamaragani-jpg/ai-driven-chatbot-smart-tourism/blob/main/docs/reports/Major_Project_Smart_Tourism_Chatbot_Report.pdf" target="_blank" rel="noopener">Report</a>
             </div>
           </article>
-          <article class="glass project">
-            <div class="tags"><span>Real-time · 2023–24</span></div>
+          <article class="project">
+            <div class="project-top"><span class="badge">Real-time · 2023–24</span></div>
             <h3>Fake Account Detection</h3>
-            <p>ML pipeline that turns profile signals into classification decisions — multi-model training, F1-aware evaluation, and audit-friendly logs.</p>
-            <div class="pills"><span>scikit-learn</span><span>Pandas</span><span>ML</span></div>
-            <div class="links">
+            <p>ML pipeline from profile signals to classification — multi-model training, F1-aware evaluation, audit-friendly logs.</p>
+            <div class="chips"><span>scikit-learn</span><span>Pandas</span><span>ML</span></div>
+            <div class="project-links">
               <a href="https://github.com/nikhilamaragani-jpg/detection-of-fake-accounts-on-social-media" target="_blank" rel="noopener">Code</a>
               <a href="https://github.com/nikhilamaragani-jpg/detection-of-fake-accounts-on-social-media/blob/main/docs/DEMO.md" target="_blank" rel="noopener">Demo</a>
             </div>
           </article>
-          <article class="glass project">
-            <div class="tags"><span>Mini · 2024–25</span></div>
+          <article class="project">
+            <div class="project-top"><span class="badge">Mini · 2024–25</span></div>
             <h3>Blockchain Notarization + eID</h3>
-            <p>Integrity-first document workflow — SHA-256 fingerprints, ledger records, MATCH/MISMATCH verification. Mentored with Conscience Technologies.</p>
-            <div class="pills"><span>Crypto</span><span>Identity</span><span>Ledger</span></div>
-            <div class="links">
+            <p>Integrity-first document flow — SHA-256, ledger records, MATCH/MISMATCH verification. Mentored with Conscience Technologies.</p>
+            <div class="chips"><span>Crypto</span><span>Identity</span><span>Ledger</span></div>
+            <div class="project-links">
               <a href="https://github.com/nikhilamaragani-jpg/blockchain-autonomous-notarization-e-id" target="_blank" rel="noopener">Code</a>
               <a href="https://github.com/nikhilamaragani-jpg/blockchain-autonomous-notarization-e-id/blob/main/docs/DEMO.md" target="_blank" rel="noopener">Demo</a>
             </div>
           </article>
-          <article class="glass project">
-            <div class="tags"><span>Automation</span></div>
+          <article class="project">
+            <div class="project-top"><span class="badge">Automation</span></div>
             <h3>ID Detection &amp; Penalty</h3>
-            <p>Policy-aware workflow: detection interface → rules engine → decision → audit trail. Ready for real CV modules later.</p>
-            <div class="pills"><span>Rules</span><span>Audit</span><span>CV concepts</span></div>
-            <div class="links">
+            <p>Policy-aware workflow: detection interface → rules → decision → audit trail. CV-ready for later vision models.</p>
+            <div class="chips"><span>Rules</span><span>Audit</span><span>CV concepts</span></div>
+            <div class="project-links">
               <a href="https://github.com/nikhilamaragani-jpg/id-detection-and-penalty-mechanism" target="_blank" rel="noopener">Code</a>
               <a href="https://github.com/nikhilamaragani-jpg/id-detection-and-penalty-mechanism/blob/main/docs/DEMO.md" target="_blank" rel="noopener">Demo</a>
             </div>
@@ -192,68 +196,77 @@
     </section>
 
     <!-- EXPERIENCE -->
-    <section class="section" id="experience">
-      <div class="wrap">
-        <p class="section-tag">05 — Experience</p>
-        <h2>Training &amp; growth</h2>
-        <div class="timeline">
-          <div class="t-item glass">
-            <h3>AI Intern — Agrasta Academy</h3>
-            <p class="muted">2 months · Preprocessing, model training, evaluation workflows</p>
+    <section class="panel" id="experience">
+      <div class="panel-inner">
+        <p class="eyebrow">Experience</p>
+        <h2>Training journey</h2>
+        <div class="exp-list">
+          <div class="exp">
+            <div class="exp-when">Training</div>
+            <div>
+              <h3>AI Intern — Agrasta Academy</h3>
+              <p>2 months · Data preprocessing, model training, evaluation workflows</p>
+            </div>
           </div>
-          <div class="t-item glass">
-            <h3>Industrial Training in AI — Agrasta Academy</h3>
-            <p class="muted">2 months · Applied ML lifecycle practice</p>
+          <div class="exp">
+            <div class="exp-when">Training</div>
+            <div>
+              <h3>Industrial Training in AI — Agrasta Academy</h3>
+              <p>2 months · Applied ML lifecycle practice</p>
+            </div>
           </div>
-          <div class="t-item glass">
-            <h3>Conscience Technologies</h3>
-            <p class="muted">Apr–May 2025 · Blockchain notarization mini project with industry mentoring</p>
+          <div class="exp">
+            <div class="exp-when">Apr–May 2025</div>
+            <div>
+              <h3>Conscience Technologies</h3>
+              <p>Blockchain notarization mini project with industry mentoring</p>
+            </div>
           </div>
-          <div class="t-item glass">
-            <h3>Workshops &amp; practice</h3>
-            <p class="muted">Power BI · Python with AI · Summer of AI · Student Tribe volunteer</p>
+          <div class="exp">
+            <div class="exp-when">Workshops</div>
+            <div>
+              <h3>Power BI · Python with AI · Summer of AI</h3>
+              <p>Dashboards, applied AI exposure · Volunteer — Student Tribe</p>
+            </div>
           </div>
         </div>
-        <p class="sub"><a href="https://github.com/nikhilamaragani-jpg/certificates-achievements" target="_blank" rel="noopener">Certificates repository →</a></p>
+        <p class="more"><a href="https://github.com/nikhilamaragani-jpg/certificates-achievements" target="_blank" rel="noopener">Certificates repository →</a></p>
       </div>
     </section>
 
     <!-- CONTACT -->
-    <section class="section alt" id="contact">
-      <div class="wrap contact">
-        <p class="section-tag">06 — Contact</p>
+    <section class="panel soft contact-panel" id="contact">
+      <div class="panel-inner center">
+        <p class="eyebrow">Contact</p>
         <h2>Get in touch</h2>
-        <p class="sub">Thanks for stopping by — happy to talk projects, ideas, and technical craft.</p>
-        <ul class="contact-list">
-          <li><span>Email</span><a href="mailto:nikhilamaragani@gmail.com">nikhilamaragani@gmail.com</a></li>
-          <li><span>Phone</span><a href="tel:+919391333050">+91 93913 33050</a></li>
-          <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/nikhil-sai-amaragani-219115382" target="_blank" rel="noopener">nikhil-sai-amaragani</a></li>
-          <li><span>GitHub</span><a href="https://github.com/nikhilamaragani-jpg" target="_blank" rel="noopener">nikhilamaragani-jpg</a></li>
-          <li><span>Location</span><strong>Hyderabad, India</strong></li>
-        </ul>
+        <p class="section-lead">Thanks for exploring — I'd love to hear about projects, ideas, or collaborations.</p>
+        <div class="contact-grid">
+          <a class="contact-card" href="mailto:nikhilamaragani@gmail.com">
+            <span>Email</span>
+            <strong>nikhilamaragani@gmail.com</strong>
+          </a>
+          <a class="contact-card" href="tel:+919391333050">
+            <span>Phone</span>
+            <strong>+91 93913 33050</strong>
+          </a>
+          <a class="contact-card" href="https://www.linkedin.com/in/nikhil-sai-amaragani-219115382" target="_blank" rel="noopener">
+            <span>LinkedIn</span>
+            <strong>nikhil-sai-amaragani</strong>
+          </a>
+          <a class="contact-card" href="https://github.com/nikhilamaragani-jpg" target="_blank" rel="noopener">
+            <span>GitHub</span>
+            <strong>nikhilamaragani-jpg</strong>
+          </a>
+        </div>
+        <p class="loc">Hyderabad, India</p>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="wrap">
-      <p>© <span id="y"></span> Amaragani Nikhil Sai · Built with care</p>
-      <p class="fine">Inspired by clarity — updated as I learn and ship</p>
-    </div>
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Amaragani Nikhil Sai · Crafted with care</p>
   </footer>
 
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-    const b = document.getElementById('burger');
-    const m = document.getElementById('menu');
-    b.addEventListener('click', () => {
-      const open = m.classList.toggle('open');
-      b.setAttribute('aria-expanded', open);
-    });
-    m.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      m.classList.remove('open');
-      b.setAttribute('aria-expanded', 'false');
-    }));
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
