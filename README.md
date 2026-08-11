@@ -1,7 +1,15 @@
-# Amaragani Nikhil Sai — Portfolio (primary site)
+# Amaragani Nikhil Sai — Portfolio
 
-**Live:** https://nikhilamaragani-jpg.github.io/
+Live site: **https://nikhilamaragani-jpg.github.io/**
 
-This is the **only main public portfolio site**.
+Personal portfolio for B.Tech CSE (Graduated 2026, CGPA 6.9) — Applied AI, ML, and practical systems.
 
-Final-year B.Tech CSE student · continuous upskilling · practical AI/ML projects.
+## Stack
+
+- Static HTML / CSS / JS
+- GitHub Pages
+- Custom violet/cyan dark theme
+
+## Sections
+
+Home · About · Education · Skills · Projects · Experience · Contact
