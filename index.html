@@ -3,15 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Amaragani Nikhil Sai | Portfolio</title>
-  <meta name="description" content="Amaragani Nikhil Sai — B.Tech CSE (Graduated 2026, CGPA 6.9). Applied AI, ML, and practical systems. Student upskilling in public." />
+  <title>Amaragani Nikhil Sai | Portfolio — Applied AI &amp; ML</title>
+  <meta name="description" content="Amaragani Nikhil Sai — B.Tech CSE (Graduated 2026, CGPA 6.9). Applied AI, machine learning, and practical systems. Student upskilling in public." />
   <meta name="author" content="Amaragani Nikhil Sai" />
   <meta name="theme-color" content="#0A101F" />
+  <meta name="keywords" content="Amaragani Nikhil Sai, Applied AI, Machine Learning, B.Tech CSE, Portfolio, Hyderabad, Python, FastAPI" />
   <meta property="og:title" content="Amaragani Nikhil Sai — Portfolio" />
-  <meta property="og:description" content="Creative, professional portfolio — applied AI, ML projects, and continuous upskilling." />
+  <meta property="og:description" content="Creative tech portfolio — applied AI, ML projects, interactive terminal, continuous upskilling." />
   <meta property="og:url" content="https://nikhilamaragani-jpg.github.io/" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://nikhilamaragani-jpg.github.io/images/profile.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="canonical" href="https://nikhilamaragani-jpg.github.io/" />
   <link rel="icon" href="images/profile.jpg" type="image/jpeg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,14 +22,21 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- 3D tech scene (canvas) + subtle floating particles -->
+  <canvas id="tech3d" aria-hidden="true"></canvas>
   <div id="particles" aria-hidden="true"></div>
   <div class="glow glow-a" aria-hidden="true"></div>
   <div class="glow glow-b" aria-hidden="true"></div>
+  <div class="glow glow-c" aria-hidden="true"></div>
+
+  <a class="skip-link" href="#home">Skip to content</a>
 
   <header class="site-nav">
     <a class="logo" href="#home">Nikhil <span>Sai</span></a>
-    <button class="nav-btn" id="navBtn" aria-label="Open menu" type="button"><i></i><i></i><i></i></button>
-    <nav id="nav">
+    <button class="nav-btn" id="navBtn" aria-label="Open menu" type="button" aria-expanded="false" aria-controls="nav">
+      <i></i><i></i><i></i>
+    </button>
+    <nav id="nav" aria-label="Primary">
       <a href="#home" data-nav>Home</a>
       <a href="#about" data-nav>About</a>
       <a href="#terminal" data-nav>Terminal</a>
@@ -40,14 +49,15 @@
   </header>
 
   <main>
+    <!-- HOME -->
     <section class="panel home" id="home">
       <div class="panel-inner home-grid reveal">
-        <div class="home-copy">
+        <div class="home-copy glass-panel">
           <p class="welcome">Hello, welcome to</p>
           <h1 class="title-xl">Amaragani Nikhil Sai<br/><span class="type-wrap"><span id="typeTarget">Portfolio</span><span class="cursor" aria-hidden="true">|</span></span></h1>
           <p class="home-lead">
             B.Tech CSE graduate building practical AI systems — modular demos, honest documentation, and continuous upskilling.
-            This site is a window into projects I've shipped and the craft I'm sharpening.
+            This portfolio is a window into projects I have shipped and the craft I keep sharpening.
           </p>
           <div class="home-actions">
             <a class="btn" href="#projects">View projects</a>
@@ -64,21 +74,22 @@
         </div>
         <div class="home-photo">
           <div class="photo-ring">
-            <img src="images/profile.jpg" alt="Amaragani Nikhil Sai" width="640" height="640" loading="eager" />
+            <img src="images/profile.jpg" alt="Professional portrait of Amaragani Nikhil Sai" width="640" height="640" loading="eager" />
           </div>
           <div class="photo-badge">Applied AI · ML · Upskilling</div>
         </div>
       </div>
     </section>
 
+    <!-- ABOUT -->
     <section class="panel" id="about">
       <div class="panel-inner two reveal">
-        <div>
+        <div class="glass-panel pad">
           <p class="eyebrow">About me</p>
           <h2>Who am I?</h2>
           <p>
             I enjoy turning ideas into systems people can actually run.
-            Whether it's a tourism chatbot or a classification pipeline, I work from both a creative and a logical angle.
+            Whether it is a tourism chatbot or a classification pipeline, I work from both a creative and a logical angle.
           </p>
           <p>
             I upskill in public: AI internships, industrial training, workshops, and four B.Tech projects with clear demos and reports.
@@ -87,15 +98,15 @@
           <p class="about-tagline">Build carefully. Measure honestly. Document clearly.</p>
         </div>
         <div class="counter-grid">
-          <div class="counter"><strong>4</strong><span>Core projects</span></div>
-          <div class="counter"><strong>2</strong><span>AI trainings</span></div>
-          <div class="counter"><strong>1</strong><span>Industry mini project</span></div>
-          <div class="counter"><strong>∞</strong><span>Still learning</span></div>
+          <div class="counter glass-panel"><strong>4</strong><span>Core projects</span></div>
+          <div class="counter glass-panel"><strong>2</strong><span>AI trainings</span></div>
+          <div class="counter glass-panel"><strong>1</strong><span>Industry mini project</span></div>
+          <div class="counter glass-panel"><strong>&infin;</strong><span>Still learning</span></div>
         </div>
       </div>
     </section>
 
-    <!-- Interactive terminal — elite craft inspired by modern portfolios -->
+    <!-- TERMINAL -->
     <section class="panel soft" id="terminal">
       <div class="panel-inner reveal">
         <p class="eyebrow">Interactive</p>
@@ -106,34 +117,36 @@
             <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
             <span class="term-title">nikhil@portfolio:~</span>
           </div>
-          <div class="term-body" id="termBody">
+          <div class="term-body" id="termBody" role="log" aria-live="polite">
             <div class="term-line"><span class="muted">Welcome. Type</span> <span class="cmd">help</span> <span class="muted">to begin.</span></div>
           </div>
           <form class="term-input-row" id="termForm" autocomplete="off">
-            <span class="prompt">$</span>
-            <input id="termInput" type="text" spellcheck="false" placeholder="help" aria-label="Terminal input" />
+            <label class="sr-only" for="termInput">Terminal command</label>
+            <span class="prompt" aria-hidden="true">$</span>
+            <input id="termInput" type="text" spellcheck="false" placeholder="help" />
           </form>
         </div>
       </div>
     </section>
 
+    <!-- EDUCATION -->
     <section class="panel" id="education">
       <div class="panel-inner reveal">
         <p class="eyebrow">Education</p>
         <h2>Where did I study?</h2>
         <div class="edu-cards">
-          <article class="card featured">
+          <article class="card featured glass-panel">
             <h3>Bachelor of Technology — CSE</h3>
             <p class="muted">Sri Indu Institute of Engineering and Technology (JNTUH), Hyderabad</p>
             <p class="accent"><strong>Graduated 2026</strong> · CGPA <strong>6.9 / 10</strong> · Roll <strong>22X31A0513</strong></p>
             <p class="fine">DSA · OOP · DBMS · OS · Networks · Python · AI · ML</p>
           </article>
-          <article class="card">
+          <article class="card glass-panel">
             <h3>Intermediate (MPC)</h3>
             <p class="muted">Telangana State Board</p>
             <p class="accent">Total marks <strong>784</strong></p>
           </article>
-          <article class="card">
+          <article class="card glass-panel">
             <h3>SSC</h3>
             <p class="muted">Secondary education</p>
             <p class="accent">CGPA <strong>9.3 / 10</strong></p>
@@ -142,32 +155,33 @@
       </div>
     </section>
 
+    <!-- SKILLS -->
     <section class="panel soft" id="skills">
       <div class="panel-inner reveal">
         <p class="eyebrow">My skills</p>
         <h2>What am I good at?</h2>
         <div class="skill-board">
-          <div class="skill-col">
+          <div class="skill-col glass-panel">
             <h3>Languages</h3>
             <div class="chips"><span>Python</span><span>SQL</span><span>Java (basic)</span><span>C (basic)</span></div>
           </div>
-          <div class="skill-col">
+          <div class="skill-col glass-panel">
             <h3>ML &amp; AI</h3>
             <div class="chips"><span>scikit-learn</span><span>NLP / Chatbots</span><span>RAG-style retrieval</span><span>Classification</span><span>CV concepts</span></div>
           </div>
-          <div class="skill-col">
+          <div class="skill-col glass-panel">
             <h3>Data</h3>
             <div class="chips"><span>Pandas</span><span>NumPy</span><span>Feature engineering</span><span>Evaluation</span><span>Power BI</span></div>
           </div>
-          <div class="skill-col">
+          <div class="skill-col glass-panel">
             <h3>Engineering</h3>
             <div class="chips"><span>Git</span><span>GitHub</span><span>FastAPI</span><span>Docker</span><span>SQLite</span><span>Modular Python</span></div>
           </div>
-          <div class="skill-col">
+          <div class="skill-col glass-panel">
             <h3>Core CS</h3>
             <div class="chips"><span>DSA</span><span>OOP</span><span>DBMS</span><span>OS</span><span>Networks</span></div>
           </div>
-          <div class="skill-col">
+          <div class="skill-col glass-panel">
             <h3>Soft skills</h3>
             <div class="chips"><span>Problem solving</span><span>Documentation</span><span>Presentations</span><span>Teamwork</span></div>
           </div>
@@ -175,15 +189,16 @@
       </div>
     </section>
 
+    <!-- PROJECTS -->
     <section class="panel" id="projects">
       <div class="panel-inner reveal">
         <p class="eyebrow">Projects</p>
         <h2>Design explorations</h2>
         <p class="section-lead">Understand the <em>why</em>, then ship something you can clone, run, and explain honestly.</p>
         <div class="project-grid">
-          <article class="project big">
+          <article class="project big glass-panel">
             <div class="project-visual v1" aria-hidden="true">
-              <span class="pv-icon">✦</span>
+              <span class="pv-icon">&#10022;</span>
               <span class="pv-label">Smart Tourism · RAG</span>
             </div>
             <div class="project-body">
@@ -198,9 +213,9 @@
               </div>
             </div>
           </article>
-          <article class="project">
+          <article class="project glass-panel">
             <div class="project-visual v2" aria-hidden="true">
-              <span class="pv-icon">◎</span>
+              <span class="pv-icon">&#9678;</span>
               <span class="pv-label">ML Classification</span>
             </div>
             <div class="project-body">
@@ -214,9 +229,9 @@
               </div>
             </div>
           </article>
-          <article class="project">
+          <article class="project glass-panel">
             <div class="project-visual v3" aria-hidden="true">
-              <span class="pv-icon">⛓</span>
+              <span class="pv-icon">&#9939;</span>
               <span class="pv-label">Integrity · eID</span>
             </div>
             <div class="project-body">
@@ -230,15 +245,15 @@
               </div>
             </div>
           </article>
-          <article class="project">
+          <article class="project glass-panel">
             <div class="project-visual v4" aria-hidden="true">
-              <span class="pv-icon">▣</span>
+              <span class="pv-icon">&#9635;</span>
               <span class="pv-label">Rules · Audit</span>
             </div>
             <div class="project-body">
               <div class="project-top"><span class="badge">Automation</span></div>
               <h3>ID Detection &amp; Penalty</h3>
-              <p>Detection interface → rules → decision → audit trail. CV-ready for later vision models.</p>
+              <p>Detection interface to rules to decision to audit trail. CV-ready for later vision models.</p>
               <div class="chips"><span>Rules</span><span>Audit</span><span>CV concepts</span></div>
               <div class="project-links">
                 <a href="https://github.com/nikhilamaragani-jpg/id-detection-and-penalty-mechanism" target="_blank" rel="noopener">Code</a>
@@ -250,33 +265,34 @@
       </div>
     </section>
 
+    <!-- TRAINING -->
     <section class="panel soft" id="experience">
       <div class="panel-inner reveal">
         <p class="eyebrow">Experience</p>
         <h2>Training journey</h2>
         <div class="exp-list">
-          <div class="exp">
+          <div class="exp glass-panel">
             <div class="exp-when">Training</div>
             <div>
               <h3>AI Intern — Agrasta Academy</h3>
               <p>2 months · Data preprocessing, model training, evaluation workflows</p>
             </div>
           </div>
-          <div class="exp">
+          <div class="exp glass-panel">
             <div class="exp-when">Training</div>
             <div>
               <h3>Industrial Training in AI — Agrasta Academy</h3>
               <p>2 months · Applied ML lifecycle practice</p>
             </div>
           </div>
-          <div class="exp">
+          <div class="exp glass-panel">
             <div class="exp-when">Apr–May 2025</div>
             <div>
               <h3>Conscience Technologies</h3>
               <p>Blockchain notarization mini project with industry mentoring</p>
             </div>
           </div>
-          <div class="exp">
+          <div class="exp glass-panel">
             <div class="exp-when">Workshops</div>
             <div>
               <h3>Power BI · Python with AI · Summer of AI</h3>
@@ -288,25 +304,26 @@
       </div>
     </section>
 
+    <!-- CONTACT -->
     <section class="panel contact-panel" id="contact">
       <div class="panel-inner center reveal">
         <p class="eyebrow">Contact</p>
         <h2>Get in touch</h2>
         <p class="section-lead">Thanks for exploring — open to conversations about projects, ideas, and learning.</p>
         <div class="contact-grid">
-          <a class="contact-card" href="mailto:nikhilamaragani@gmail.com">
+          <a class="contact-card glass-panel" href="mailto:nikhilamaragani@gmail.com">
             <span>Email</span>
             <strong>nikhilamaragani@gmail.com</strong>
           </a>
-          <a class="contact-card" href="tel:+919391333050">
+          <a class="contact-card glass-panel" href="tel:+919391333050">
             <span>Phone</span>
             <strong>+91 93913 33050</strong>
           </a>
-          <a class="contact-card" href="https://www.linkedin.com/in/nikhil-sai-amaragani-219115382" target="_blank" rel="noopener">
+          <a class="contact-card glass-panel" href="https://www.linkedin.com/in/nikhil-sai-amaragani-219115382" target="_blank" rel="noopener">
             <span>LinkedIn</span>
             <strong>nikhil-sai-amaragani</strong>
           </a>
-          <a class="contact-card" href="https://github.com/nikhilamaragani-jpg" target="_blank" rel="noopener">
+          <a class="contact-card glass-panel" href="https://github.com/nikhilamaragani-jpg" target="_blank" rel="noopener">
             <span>GitHub</span>
             <strong>nikhilamaragani-jpg</strong>
           </a>

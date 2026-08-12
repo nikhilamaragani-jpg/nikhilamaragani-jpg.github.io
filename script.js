@@ -1,29 +1,269 @@
 (function () {
+  "use strict";
+
   const year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
 
-  // floating particles
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ========== 3D TECH BACKGROUND ==========
+     Perspective grid floor + neural network nodes + floating tech bits.
+     Creative / professional / tech — inspired by particle sites, unique scene. */
+  (function initTech3D() {
+    const canvas = document.getElementById("tech3d");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d", { alpha: true });
+    if (!ctx) return;
+
+    let w = 0;
+    let h = 0;
+    let dpr = 1;
+    let nodes = [];
+    let symbols = [];
+    let t = 0;
+    let raf = 0;
+    let mx = 0.5;
+    let my = 0.5;
+
+    const NODE_COUNT = reduceMotion ? 28 : 55;
+    const SYM = ["01", "10", "{}", "AI", "ML", "</>", "λ", "◆", "◇", "·"];
+
+    function resize() {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas.width = Math.floor(w * dpr);
+      canvas.height = Math.floor(h * dpr);
+      canvas.style.width = w + "px";
+      canvas.style.height = h + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function seed() {
+      nodes = [];
+      for (let i = 0; i < NODE_COUNT; i++) {
+        nodes.push({
+          x: Math.random() * w,
+          y: Math.random() * h * 0.85,
+          z: 0.3 + Math.random() * 0.7,
+          vx: (Math.random() - 0.5) * 0.25,
+          vy: (Math.random() - 0.5) * 0.25,
+          r: 1.2 + Math.random() * 2.2,
+          hue: Math.random() > 0.55 ? "violet" : Math.random() > 0.4 ? "cyan" : "green",
+        });
+      }
+      symbols = [];
+      const nSym = reduceMotion ? 8 : 16;
+      for (let i = 0; i < nSym; i++) {
+        symbols.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          s: SYM[(Math.random() * SYM.length) | 0],
+          sp: 0.15 + Math.random() * 0.35,
+          op: 0.08 + Math.random() * 0.12,
+          size: 10 + Math.random() * 8,
+        });
+      }
+    }
+
+    function drawGrid() {
+      // Perspective floor grid — 3D tech floor
+      const horizon = h * 0.52;
+      const vanishX = w * (0.5 + (mx - 0.5) * 0.08);
+      const vanishY = horizon - 20;
+
+      ctx.save();
+      ctx.strokeStyle = "rgba(34,211,238,0.08)";
+      ctx.lineWidth = 1;
+
+      const rows = 14;
+      for (let i = 0; i <= rows; i++) {
+        const p = i / rows;
+        const y = horizon + Math.pow(p, 1.6) * (h - horizon) * 1.05;
+        const spread = 40 + p * w * 0.95;
+        ctx.beginPath();
+        ctx.moveTo(vanishX - spread, y);
+        ctx.lineTo(vanishX + spread, y);
+        ctx.stroke();
+      }
+
+      const cols = 18;
+      for (let i = -cols; i <= cols; i++) {
+        const edgeX = vanishX + i * (w / cols) * 1.3;
+        ctx.beginPath();
+        ctx.moveTo(vanishX, vanishY);
+        ctx.lineTo(edgeX, h + 20);
+        ctx.strokeStyle = i % 3 === 0 ? "rgba(167,139,250,0.1)" : "rgba(34,211,238,0.06)";
+        ctx.stroke();
+      }
+
+      // horizon glow line
+      const grad = ctx.createLinearGradient(0, horizon - 1, w, horizon + 1);
+      grad.addColorStop(0, "rgba(167,139,250,0)");
+      grad.addColorStop(0.5, "rgba(34,211,238,0.22)");
+      grad.addColorStop(1, "rgba(167,139,250,0)");
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(0, horizon);
+      ctx.lineTo(w, horizon);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function colorFor(hue, a) {
+      if (hue === "violet") return "rgba(167,139,250," + a + ")";
+      if (hue === "green") return "rgba(16,185,129," + a + ")";
+      return "rgba(34,211,238," + a + ")";
+    }
+
+    function drawNetwork() {
+      // connections
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const a = nodes[i];
+          const b = nodes[j];
+          const dx = a.x - b.x;
+          const dy = a.y - b.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const maxD = 140 * ((a.z + b.z) / 2);
+          if (dist < maxD) {
+            const alpha = (1 - dist / maxD) * 0.22 * Math.min(a.z, b.z);
+            ctx.strokeStyle = colorFor(a.hue, alpha);
+            ctx.lineWidth = 0.8;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+      // nodes
+      for (const n of nodes) {
+        const r = n.r * (0.7 + n.z);
+        ctx.beginPath();
+        ctx.fillStyle = colorFor(n.hue, 0.35 + n.z * 0.4);
+        ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+        ctx.fill();
+        // soft glow
+        ctx.beginPath();
+        ctx.fillStyle = colorFor(n.hue, 0.08);
+        ctx.arc(n.x, n.y, r * 3.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function drawSymbols() {
+      ctx.save();
+      ctx.font = "500 12px 'JetBrains Mono', monospace";
+      for (const s of symbols) {
+        ctx.fillStyle = "rgba(148,163,184," + s.op + ")";
+        ctx.font = "500 " + s.size + "px 'JetBrains Mono', monospace";
+        ctx.fillText(s.s, s.x, s.y);
+      }
+      ctx.restore();
+    }
+
+    function drawHexRings() {
+      // floating tech rings (3D-ish ellipses)
+      ctx.save();
+      for (let i = 0; i < 3; i++) {
+        const cx = w * (0.2 + i * 0.3) + Math.sin(t * 0.0004 + i) * 30;
+        const cy = h * (0.25 + (i % 2) * 0.15) + Math.cos(t * 0.0003 + i) * 20;
+        const rx = 60 + i * 28;
+        const ry = rx * 0.35;
+        ctx.strokeStyle = i % 2 ? "rgba(167,139,250,0.12)" : "rgba(34,211,238,0.1)";
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.ellipse(cx, cy, rx, ry, t * 0.0002 + i, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    function step() {
+      t += 16;
+      ctx.clearRect(0, 0, w, h);
+
+      // vignette base already in CSS; draw scene
+      drawGrid();
+      drawHexRings();
+      drawSymbols();
+      drawNetwork();
+
+      if (!reduceMotion) {
+        for (const n of nodes) {
+          n.x += n.vx * n.z;
+          n.y += n.vy * n.z;
+          // gentle mouse parallax pull
+          n.x += (mx - 0.5) * 0.08 * n.z;
+          n.y += (my - 0.5) * 0.05 * n.z;
+          if (n.x < -20) n.x = w + 20;
+          if (n.x > w + 20) n.x = -20;
+          if (n.y < -20) n.y = h * 0.9;
+          if (n.y > h * 0.92) n.y = -20;
+        }
+        for (const s of symbols) {
+          s.y -= s.sp;
+          if (s.y < -20) {
+            s.y = h + 20;
+            s.x = Math.random() * w;
+          }
+        }
+      }
+
+      raf = requestAnimationFrame(step);
+    }
+
+    function onMove(e) {
+      mx = e.clientX / w;
+      my = e.clientY / h;
+    }
+
+    resize();
+    seed();
+    step();
+    window.addEventListener("resize", () => {
+      resize();
+      seed();
+    });
+    if (!reduceMotion) {
+      window.addEventListener("pointermove", onMove, { passive: true });
+    }
+
+    // pause when tab hidden
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        cancelAnimationFrame(raf);
+      } else {
+        raf = requestAnimationFrame(step);
+      }
+    });
+  })();
+
+  /* ========== Floating particles (sister-style layer) ========== */
   const layer = document.getElementById("particles");
-  if (layer) {
-    for (let i = 0; i < 36; i++) {
+  if (layer && !reduceMotion) {
+    const count = 28;
+    for (let i = 0; i < count; i++) {
       const p = document.createElement("div");
       p.className = "particle";
-      const size = 2 + Math.random() * 4;
+      const size = 2 + Math.random() * 3.5;
       p.style.width = size + "px";
       p.style.height = size + "px";
       p.style.left = Math.random() * 100 + "%";
       p.style.top = 55 + Math.random() * 45 + "%";
-      p.style.animationDuration = 12 + Math.random() * 18 + "s";
+      p.style.animationDuration = 14 + Math.random() * 18 + "s";
       p.style.animationDelay = Math.random() * 10 + "s";
-      if (Math.random() > 0.5) p.style.background = "rgba(34,211,238,.45)";
-      if (Math.random() > 0.8) p.style.background = "rgba(16,185,129,.4)";
+      if (Math.random() > 0.5) p.style.background = "rgba(34,211,238,.4)";
+      if (Math.random() > 0.85) p.style.background = "rgba(16,185,129,.35)";
       layer.appendChild(p);
     }
   }
 
-  // typing effect
+  /* ========== Typing ========== */
   const typeEl = document.getElementById("typeTarget");
-  if (typeEl) {
+  if (typeEl && !reduceMotion) {
     const phrases = ["Portfolio", "Applied AI", "ML Systems", "Upskilling", "Clean Demos"];
     let pi = 0;
     let ci = 0;
@@ -51,17 +291,22 @@
     setTimeout(tick, 800);
   }
 
-  // mobile nav
+  /* ========== Nav ========== */
   const btn = document.getElementById("navBtn");
   const nav = document.getElementById("nav");
   if (btn && nav) {
-    btn.addEventListener("click", () => nav.classList.toggle("open"));
+    btn.addEventListener("click", () => {
+      const open = nav.classList.toggle("open");
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+    });
     nav.querySelectorAll("a").forEach((a) =>
-      a.addEventListener("click", () => nav.classList.remove("open"))
+      a.addEventListener("click", () => {
+        nav.classList.remove("open");
+        btn.setAttribute("aria-expanded", "false");
+      })
     );
   }
 
-  // active nav
   const links = [...document.querySelectorAll("[data-nav]")];
   const sections = links
     .map((a) => document.querySelector(a.getAttribute("href")))
@@ -72,6 +317,7 @@
     for (const s of sections) {
       if (s.offsetTop <= y) current = s;
     }
+    if (!current) return;
     links.forEach((a) => {
       a.classList.toggle("active", a.getAttribute("href") === "#" + current.id);
     });
@@ -79,9 +325,9 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  // scroll reveal
+  /* ========== Reveal ========== */
   const reveals = document.querySelectorAll(".reveal");
-  if ("IntersectionObserver" in window) {
+  if ("IntersectionObserver" in window && !reduceMotion) {
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -98,7 +344,7 @@
     reveals.forEach((el) => el.classList.add("in"));
   }
 
-  // interactive terminal
+  /* ========== Terminal ========== */
   const termBody = document.getElementById("termBody");
   const termForm = document.getElementById("termForm");
   const termInput = document.getElementById("termInput");
@@ -160,12 +406,15 @@
       e.preventDefault();
       const raw = termInput.value.trim();
       if (!raw) return;
-      write(`<span class="cmd">$ ${raw}</span>`);
+      const safe = raw.replace(/[<>&]/g, "");
+      write('<span class="cmd">$ ' + safe + "</span>");
       const key = raw.toLowerCase().split(/\s+/)[0];
       if (commands[key]) commands[key]();
       else
         write(
-          `<span class="err">command not found:</span> ${key} — type <span class="cmd">help</span>`
+          '<span class="err">command not found:</span> ' +
+            safe +
+            ' — type <span class="cmd">help</span>'
         );
       termInput.value = "";
     });
