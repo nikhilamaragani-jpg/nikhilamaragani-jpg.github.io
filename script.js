@@ -25,8 +25,16 @@
     let mx = 0.5;
     let my = 0.5;
 
-    const NODE_COUNT = reduceMotion ? 28 : 55;
-    const SYM = ["01", "10", "{}", "AI", "ML", "</>", "λ", "◆", "◇", "·"];
+    const NODE_COUNT = reduceMotion ? 36 : 72;
+    // Project + B.Tech tech vocabulary (AI, ML, coding)
+    const SYM = [
+      "AI", "ML", "NLP", "RAG", "F1", "API", "CLI",
+      "FastAPI", "Docker", "sklearn", "Pandas", "Python",
+      "SHA-256", "ledger", "hash", "audit", "rules",
+      "chat", "intent", "vector", "train", "eval",
+      "01", "10", "{}", "</>", "λ", "def", "import",
+      "SQL", "Git", "DSA", "OOP", "DBMS"
+    ];
 
     function resize() {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -53,7 +61,7 @@
         });
       }
       symbols = [];
-      const nSym = reduceMotion ? 8 : 16;
+      const nSym = reduceMotion ? 12 : 28;
       for (let i = 0; i < nSym; i++) {
         symbols.push({
           x: Math.random() * w,
@@ -167,17 +175,92 @@
     function drawHexRings() {
       // floating tech rings (3D-ish ellipses)
       ctx.save();
-      for (let i = 0; i < 3; i++) {
-        const cx = w * (0.2 + i * 0.3) + Math.sin(t * 0.0004 + i) * 30;
-        const cy = h * (0.25 + (i % 2) * 0.15) + Math.cos(t * 0.0003 + i) * 20;
-        const rx = 60 + i * 28;
-        const ry = rx * 0.35;
-        ctx.strokeStyle = i % 2 ? "rgba(167,139,250,0.12)" : "rgba(34,211,238,0.1)";
+      for (let i = 0; i < 4; i++) {
+        const cx = w * (0.18 + i * 0.22) + Math.sin(t * 0.0004 + i) * 36;
+        const cy = h * (0.22 + (i % 2) * 0.14) + Math.cos(t * 0.0003 + i) * 24;
+        const rx = 55 + i * 26;
+        const ry = rx * 0.34;
+        ctx.strokeStyle = i % 2 ? "rgba(167,139,250,0.14)" : "rgba(34,211,238,0.12)";
         ctx.lineWidth = 1.2;
         ctx.beginPath();
-        ctx.ellipse(cx, cy, rx, ry, t * 0.0002 + i, 0, Math.PI * 2);
+        ctx.ellipse(cx, cy, rx, ry, t * 0.00025 + i, 0, Math.PI * 2);
         ctx.stroke();
       }
+      ctx.restore();
+    }
+
+    function drawCircuitCorners() {
+      ctx.save();
+      ctx.strokeStyle = "rgba(34,211,238,0.12)";
+      ctx.fillStyle = "rgba(167,139,250,0.35)";
+      ctx.lineWidth = 1;
+      const traces = [
+        [[20, 80], [20, 40], [80, 40], [80, 20]],
+        [[w - 20, 80], [w - 20, 40], [w - 80, 40], [w - 80, 20]],
+        [[20, h - 80], [20, h - 40], [90, h - 40]],
+        [[w - 20, h - 80], [w - 20, h - 40], [w - 90, h - 40]],
+      ];
+      for (const path of traces) {
+        ctx.beginPath();
+        ctx.moveTo(path[0][0], path[0][1]);
+        for (let i = 1; i < path.length; i++) ctx.lineTo(path[i][0], path[i][1]);
+        ctx.stroke();
+        const last = path[path.length - 1];
+        ctx.beginPath();
+        ctx.arc(last[0], last[1], 2.5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+
+    function drawMatrixRain() {
+      ctx.save();
+      ctx.font = "11px 'JetBrains Mono', monospace";
+      const cols = Math.floor(w / 48);
+      for (let i = 0; i < cols; i++) {
+        const x = 24 + i * 48;
+        const phase = (t * 0.04 + i * 37) % (h + 200);
+        const y = phase - 100;
+        const bits = (i * 7 + ((t / 120) | 0)) % 2 === 0 ? "1" : "0";
+        ctx.fillStyle = "rgba(34,211,238," + (0.04 + (i % 5) * 0.012) + ")";
+        for (let k = 0; k < 8; k++) {
+          ctx.fillText(bits, x, y + k * 16);
+        }
+      }
+      ctx.restore();
+    }
+
+    function drawAIConstellation() {
+      const cx = w * 0.78 + (mx - 0.5) * 20;
+      const cy = h * 0.28 + (my - 0.5) * 12;
+      const pts = [];
+      const n = 10;
+      for (let i = 0; i < n; i++) {
+        const a = (i / n) * Math.PI * 2 + t * 0.00015;
+        const rr = 48 + 12 * Math.sin(t * 0.001 + i);
+        pts.push([cx + Math.cos(a) * rr, cy + Math.sin(a) * rr * 0.72]);
+      }
+      ctx.save();
+      ctx.strokeStyle = "rgba(167,139,250,0.16)";
+      ctx.lineWidth = 1;
+      for (let i = 0; i < pts.length; i++) {
+        for (let j = i + 1; j < pts.length; j++) {
+          if ((i + j) % 3 !== 0) continue;
+          ctx.beginPath();
+          ctx.moveTo(pts[i][0], pts[i][1]);
+          ctx.lineTo(pts[j][0], pts[j][1]);
+          ctx.stroke();
+        }
+      }
+      for (const p of pts) {
+        ctx.beginPath();
+        ctx.fillStyle = "rgba(34,211,238,0.45)";
+        ctx.arc(p[0], p[1], 2.2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.fillStyle = "rgba(167,139,250,0.35)";
+      ctx.font = "600 11px 'JetBrains Mono', monospace";
+      ctx.fillText("NEURAL.GRAPH", cx - 42, cy + 78);
       ctx.restore();
     }
 
@@ -187,7 +270,10 @@
 
       // vignette base already in CSS; draw scene
       drawGrid();
+      drawMatrixRain();
+      drawCircuitCorners();
       drawHexRings();
+      drawAIConstellation();
       drawSymbols();
       drawNetwork();
 
@@ -369,7 +455,7 @@
       ),
     education: () =>
       write(
-        "SIIET (JNTUH) · B.Tech CSE · Graduated 2026 · CGPA 6.9 · Roll 22X31A0513 · Intermediate 784 · SSC 9.3"
+        "SIIET (JNTUH) · B.Tech CSE · Graduated 2026 · CGPA 6.9 · Roll 22X31A0513 · Intermediate 784 · SSC Dilsukhnagar Public School · 9.3"
       ),
     skills: () =>
       write(
