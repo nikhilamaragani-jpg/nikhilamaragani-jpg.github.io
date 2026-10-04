@@ -112,6 +112,18 @@ h1 span { color: var(--green); font-family: var(--serif); font-weight: 400; font
 .section-heading h2, .direction-layout h2, .contact-layout h2 { margin-bottom: 1.3rem; font-size: clamp(2.2rem, 4vw, 3.7rem); line-height: 1.08; letter-spacing: -.055em; font-weight: 600; }
 .about-copy { max-width: 650px; color: var(--muted); }
 .about-copy .about-lead { color: var(--ink); font-size: 1.28rem; line-height: 1.55; }
+.profile-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin: 1.35rem 0;
+  border: 1px solid var(--line);
+  background: var(--line);
+}
+.profile-facts div { min-width: 0; padding: .85rem; background: var(--paper); }
+.profile-facts span, .profile-facts strong { display: block; }
+.profile-facts span { margin-bottom: .35rem; color: var(--green); font: 500 .57rem/1.4 var(--mono); letter-spacing: .08em; }
+.profile-facts strong { color: var(--ink); font-size: .78rem; line-height: 1.4; }
 .inline-link { display: inline-flex; align-items: center; gap: .8rem; margin-top: .55rem; color: var(--green); font-size: .85rem; font-weight: 700; }
 .inline-link:hover { text-decoration: underline; text-underline-offset: 4px; }
 
@@ -233,6 +245,7 @@ h1 span { color: var(--green); font-family: var(--serif); font-weight: 400; font
   .hero-bottom span:nth-child(2) { display: none; }
   .section { padding: 4.5rem 0; }
   .about-layout, .credential-layout, .contact-layout { grid-template-columns: 1fr; gap: 1rem; }
+  .profile-facts { grid-template-columns: 1fr; }
   .section-heading h2, .contact-layout h2 { font-size: 2.65rem; }
   .work-heading { display: block; }
   .work-heading > p { margin-top: 1rem; }
