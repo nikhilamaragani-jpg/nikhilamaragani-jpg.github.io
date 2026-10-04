@@ -21,7 +21,7 @@ An early-career portfolio focused on data analysis and business intelligence, su
 
 ## Current profile
 
-The portfolio presents an early-career Data Analyst goal and learning stage, retaining education, training, technical projects, portrait, and contact links from the previous portfolio. Confirmed credentials shown here include IBM's *Introduction to Data Analytics* course and BE10X's *AI Tools & Claude Workshop* certificate of completion. The BE10X certificate lists workshop outcomes involving AI-assisted presentations, data analysis, and coding/debugging; these are presented as certificate-stated outcomes, not independently validated skills or job experience. The Power BI dashboard certificate's issuer, official title, date, and credential URL are explicitly pending confirmation. The IBM course is not presented as the full IBM Data Analyst Professional Certificate.
+The portfolio targets entry-level Data Analyst and BI Analyst opportunities, particularly in Germany and Switzerland. It lists IBM's *Introduction to Data Analytics*, Course 1, completed October 3, 2026; this is not the full IBM Professional Certificate. Office Master Power BI and Python workshop certificates are identified as workshops. The site also includes BE10X's *AI Tools & Claude Workshop* certificate of completion; its stated outcomes are presented as certificate claims, not independently validated skills or job experience.
 
 ## Projects
 
