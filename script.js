@@ -350,7 +350,7 @@
   /* ========== Typing ========== */
   const typeEl = document.getElementById("typeTarget");
   if (typeEl && !reduceMotion) {
-    const phrases = ["Portfolio", "Applied AI", "ML Systems", "Upskilling", "Clean Demos"];
+    const phrases = ["Data Analysis", "BI Analyst", "Python & SQL", "Power BI", "Clear Insights"];
     let pi = 0;
     let ci = 0;
     let deleting = false;
@@ -451,7 +451,7 @@
       ),
     about: () =>
       write(
-        "Amaragani Nikhil Sai — B.Tech CSE · Graduated 2026 · CGPA 6.9 · Applied AI & ML · student upskilling in public."
+        "Amaragani Nikhil Sai — B.Tech CSE · Graduated 2026 · Entry-level Data Analyst / BI Analyst focus · Python · SQL · Power BI."
       ),
     education: () =>
       write(
@@ -459,15 +459,15 @@
       ),
     skills: () =>
       write(
-        "Python · SQL · scikit-learn · NLP/RAG · FastAPI · Docker · Pandas · Power BI · Git"
+        "Python · SQL · Pandas · NumPy · Power BI · scikit-learn · NLP/RAG · Git"
       ),
     projects: () =>
       write(
-        "1) Smart Tourism Chatbot (major) · 2) Fake Account Detection · 3) Blockchain Notarization+eID · 4) ID Detection & Penalty"
+        "Academic projects: Smart Tourism Chatbot · Fake Account Detection · Blockchain Notarization+eID · ID Detection & Penalty. Workshop analysis PDFs: Campfly Sales Analysis · Netflix Analysis."
       ),
     training: () =>
       write(
-        "Agrasta AI Intern (2m) · Agrasta Industrial AI (2m) · Conscience Technologies mentoring · Power BI / Python-AI workshops"
+        "Agrasta Academy AI Intern (Oct–Dec 2024) · Agrasta AI industrial training · IBM Introduction to Data Analytics course 1 (completed Oct 3, 2026) · Office Master Power BI and Python workshop certificates · Summer of AI offer only."
       ),
     contact: () =>
       write(
@@ -481,7 +481,7 @@
       write(
         '<a class="cmd" href="https://nikhilamaragani-jpg.github.io/" target="_blank" rel="noopener">nikhilamaragani-jpg.github.io</a>'
       ),
-    whoami: () => write("nikhil · builder · applied-ai"),
+    whoami: () => write("nikhil · aspiring data analyst · BI"),
     clear: () => {
       if (termBody) termBody.innerHTML = "";
     },
