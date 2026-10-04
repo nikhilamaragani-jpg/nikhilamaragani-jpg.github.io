@@ -65,7 +65,7 @@ h1 span { color: var(--green); font-family: var(--serif); font-weight: 400; font
 .button-primary:hover { background: #0f5742; color: var(--white); }
 .button-text { padding-inline: 0; color: var(--ink); }
 .availability { max-width: 620px; margin: 1.3rem 0 0; color: var(--muted); font-size: .85rem; }
-.hero-visual { position: relative; align-self: center; justify-self: end; width: min(100%, 500px); min-height: 520px; overflow: hidden; }
+.hero-visual { position: relative; align-self: center; justify-self: end; width: min(100%, 500px); min-height: 612px; overflow: hidden; }
 .visual-orbit { position: absolute; z-index: -1; border: 1px solid rgba(23, 106, 82, .17); border-radius: 50%; pointer-events: none; }
 .visual-orbit-one { width: 350px; aspect-ratio: 1; right: 5%; top: 5%; }
 .visual-orbit-two { width: 440px; aspect-ratio: 1; right: -4%; top: -3%; border-style: dashed; animation: orbit 70s linear infinite; }
@@ -94,12 +94,12 @@ h1 span { color: var(--green); font-family: var(--serif); font-weight: 400; font
 .signal-metrics span { color: #a9bcb0; font: 500 .52rem var(--mono); letter-spacing: .1em; }
 .signal-metrics strong { margin-top: .15rem; color: #f4f7ed; font-size: 1rem; font-weight: 600; font-variant-numeric: tabular-nums; }
 .signal-card figcaption { margin-top: .15rem; color: #a9bcb0; font-size: .58rem; }
-.portrait-stamp { position: absolute; z-index: 1; top: 0; right: 0; display: flex; align-items: center; gap: .7rem; width: min(86%, 330px); padding: .6rem; color: var(--ink); background: rgba(255, 255, 255, .94); border: 1px solid rgba(25, 43, 39, .1); border-radius: 5px; box-shadow: 0 12px 35px rgba(25, 43, 39, .13); backdrop-filter: blur(12px); }
-.portrait-stamp img { display: block; flex: 0 0 auto; width: 60px; height: 60px; object-fit: cover; object-position: center 35%; border-radius: 50%; outline: 2px solid var(--paper); }
+.portrait-stamp { position: absolute; z-index: 1; top: 0; right: 0; display: flex; align-items: center; gap: 1rem; width: min(100%, 390px); padding: .7rem; color: var(--ink); background: rgba(255, 255, 255, .96); border: 1px solid rgba(25, 43, 39, .1); border-radius: 7px; box-shadow: 0 12px 35px rgba(25, 43, 39, .13); backdrop-filter: blur(12px); }
+.portrait-stamp img { display: block; flex: 0 0 auto; width: 144px; height: 144px; object-fit: cover; object-position: center 35%; border-radius: 50%; outline: 2px solid var(--paper); }
 .portrait-stamp div { min-width: 0; flex: 1; }
 .portrait-stamp strong, .portrait-stamp div span { display: block; }
-.portrait-stamp strong { font-size: .76rem; }
-.portrait-stamp div span { margin-top: .2rem; color: var(--muted); font: 500 .5rem var(--mono); letter-spacing: .08em; }
+.portrait-stamp strong { font-size: .85rem; }
+.portrait-stamp div span { margin-top: .2rem; color: var(--muted); font: 500 .57rem var(--mono); letter-spacing: .08em; }
 .portrait-year { color: var(--green); font: 500 .63rem var(--mono); }
 .visual-index { position: absolute; right: 0; bottom: 0; left: 0; display: flex; justify-content: space-between; color: #87948c; font: 500 .54rem var(--mono); letter-spacing: .1em; }
 .hero-bottom, .work-number, .work-side-note, .skill-status, .credential-kind, .footer-layout > a:last-child { font-family: var(--mono); font-size: .66rem; letter-spacing: .1em; }
@@ -220,7 +220,7 @@ h1 span { color: var(--green); font-family: var(--serif); font-weight: 400; font
 
 @media (max-width: 900px) {
   .hero { min-height: 0; padding-bottom: 0; grid-template-columns: 1.05fr .95fr; column-gap: 3%; }
-  .hero-visual { min-height: 485px; }
+  .hero-visual { min-height: 600px; }
   .signal-card { padding-inline: 1.1rem; }
   .about-layout, .credential-layout { gap: 5%; }
   .skill-grid { grid-template-columns: repeat(2, 1fr); }
@@ -235,11 +235,12 @@ h1 span { color: var(--green); font-family: var(--serif); font-weight: 400; font
   .header-link { font-size: .73rem; }
   .hero { display: block; padding-top: 4rem; }
   h1 { font-size: clamp(3rem, 15vw, 5rem); }
-  .hero-visual { max-width: 500px; min-height: 490px; margin: 3.2rem auto 0; }
+  .hero-visual { max-width: 500px; min-height: 560px; margin: 3.2rem auto 0; }
   .signal-card { bottom: 18px; padding: 1rem 1.1rem .85rem; }
   .signal-heading { margin-top: 1rem; }
   .signal-heading h2 { font-size: 1.35rem; }
-  .portrait-stamp { width: min(86%, 330px); }
+  .portrait-stamp { width: min(92%, 390px); }
+  .portrait-stamp img { width: clamp(108px, 30vw, 132px); height: clamp(108px, 30vw, 132px); }
   .visual-index { bottom: 0; }
   .hero-bottom { margin-top: 3rem; flex-wrap: wrap; font-size: .55rem; }
   .hero-bottom span:nth-child(2) { display: none; }
@@ -276,11 +277,13 @@ h1 span { color: var(--green); font-family: var(--serif); font-weight: 400; font
   .credential { grid-template-columns: 42px 1fr; }
   .credential-mark { width: 38px; height: 38px; }
   .credential-kind { grid-column: 2; }
-  .hero-visual { min-height: 445px; }
+  .hero-visual { min-height: 560px; }
   .signal-card { padding-inline: .8rem; }
   .signal-heading h2 { font-size: 1.2rem; }
-  .portrait-stamp img { width: 52px; height: 52px; }
-  .portrait-stamp strong { font-size: .69rem; }
+  .portrait-stamp { gap: .7rem; padding: .55rem; }
+  .portrait-stamp img { width: 108px; height: 108px; }
+  .portrait-stamp strong { font-size: .75rem; }
+  .portrait-stamp div span { font-size: .48rem; }
   .signal-metrics strong { font-size: .88rem; }
 }
 @media (prefers-reduced-motion: reduce) {
