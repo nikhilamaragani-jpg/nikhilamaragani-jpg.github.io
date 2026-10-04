@@ -9,6 +9,7 @@ An early-career portfolio focused on data analysis and business intelligence, su
 - `showcase.js` — dependency-free homepage explorer for the synthetic retail summary
 - `assets/images/` — profile image carried forward from the original portfolio
 - `assets/powerbi-dashboards.pdf` — original two-page dashboard PDF supplied by the author
+- `assets/certificates/be10x-ai-tools-claude-workshop.pdf` — original BE10X AI Tools & Claude Workshop certificate
 - `projects/analytics-foundations/` — two reproducible foundational analytics case studies and dashboards
 - `projects/analytics-foundations/powerbi/dashboard-spec.md` — Power BI model and report build specification
 - `images/` — portrait and supporting image assets retained from the previous site
@@ -20,7 +21,7 @@ An early-career portfolio focused on data analysis and business intelligence, su
 
 ## Current profile
 
-The portfolio presents an early-career Data Analyst goal and learning stage, retaining education, training, technical projects, portrait, and contact links from the previous portfolio. Confirmed learning shown here is IBM's *Introduction to Data Analytics* course and a Power BI dashboard certificate. The Power BI certificate's issuer, official title, date, and credential URL are explicitly pending confirmation. The IBM course is not presented as the full IBM Data Analyst Professional Certificate.
+The portfolio presents an early-career Data Analyst goal and learning stage, retaining education, training, technical projects, portrait, and contact links from the previous portfolio. Confirmed credentials shown here include IBM's *Introduction to Data Analytics* course and BE10X's *AI Tools & Claude Workshop* certificate of completion. The BE10X certificate lists workshop outcomes involving AI-assisted presentations, data analysis, and coding/debugging; these are presented as certificate-stated outcomes, not independently validated skills or job experience. The Power BI dashboard certificate's issuer, official title, date, and credential URL are explicitly pending confirmation. The IBM course is not presented as the full IBM Data Analyst Professional Certificate.
 
 ## Projects
 
