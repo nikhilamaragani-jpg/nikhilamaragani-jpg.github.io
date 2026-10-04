@@ -6,6 +6,7 @@ An early-career portfolio focused on data analysis and business intelligence, su
 
 - `index.html` — responsive portfolio website with an accessible SVG chart of the synthetic retail sample
 - `styles.css` — editorial visual system, responsive layout, and reduced-motion-aware chart treatment
+- `showcase.js` — dependency-free homepage explorer for the synthetic retail summary
 - `assets/images/` — profile image carried forward from the original portfolio
 - `assets/powerbi-dashboards.pdf` — original two-page dashboard PDF supplied by the author
 - `projects/analytics-foundations/` — two reproducible foundational analytics case studies and dashboards
@@ -33,7 +34,7 @@ From this directory:
 python -m http.server 8000
 ```
 
-Open `http://localhost:8000`. The analytics dashboards require the included `summary.json`; see [`projects/analytics-foundations/README.md`](projects/analytics-foundations/README.md) for how to regenerate the synthetic data and dashboard summary.
+Open `http://localhost:8000`. The homepage explorer and analytics dashboards use the included `projects/analytics-foundations/dashboard/summary.json`; see [`projects/analytics-foundations/README.md`](projects/analytics-foundations/README.md) for how to regenerate the synthetic data and dashboard summary. The homepage includes a static snapshot and data table if JavaScript is unavailable.
 
 ## Publish
 

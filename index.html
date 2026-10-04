@@ -14,9 +14,6 @@
   <link rel="canonical" href="https://nikhilamaragani-jpg.github.io/" />
   <link rel="icon" href="assets/images/profile.jpg" type="image/jpeg" />
   <title>Amaragani Nikhil Sai | Data Analyst Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -27,7 +24,8 @@
       <a class="wordmark" href="#home" aria-label="Amaragani Nikhil Sai, home">NA<span>.</span></a>
       <nav class="nav" aria-label="Main navigation">
         <a href="#about">About</a>
-        <a href="#work">Analytics</a>
+        <a href="#data-lab">Data lab</a>
+        <a href="#work">Projects</a>
         <a href="#skills">Skills</a>
         <a href="#background">Background</a>
       </nav>
@@ -113,6 +111,100 @@
       </div>
     </section>
 
+    <section class="data-lab-section" id="data-lab" aria-labelledby="data-lab-title">
+      <div class="container">
+        <div class="lab-heading">
+          <div>
+            <p class="eyebrow"><span class="lab-index">00</span> / ANALYST FIELDNOTE · INTERACTIVE</p>
+            <h2 id="data-lab-title">A small question.<br /><span>A clearer picture.</span></h2>
+          </div>
+          <p class="lab-question"><span>BUSINESS QUESTION</span>Where does this fictional retailer generate its revenue, and how does the picture change over time?</p>
+        </div>
+
+        <div class="lab-shell">
+          <div class="lab-topline">
+            <span><i aria-hidden="true"></i> RETAIL / PERFORMANCE EXPLORER</span>
+            <span>DATASET · PRACTICE ONLY</span>
+          </div>
+          <div class="lab-controls" aria-label="Analytics filters">
+            <label>Period
+              <select id="lab-period" aria-label="Filter data by period">
+                <option value="all">Full period</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025 · partial</option>
+              </select>
+            </label>
+            <label>Compare
+              <select id="lab-dimension" aria-label="Choose how to group the chart">
+                <option value="product_category">Product category</option>
+                <option value="region">Region</option>
+              </select>
+            </label>
+            <label>Measure
+              <select id="lab-measure" aria-label="Choose the chart measure">
+                <option value="revenue_eur">Revenue</option>
+                <option value="gross_profit_eur">Gross profit</option>
+              </select>
+            </label>
+            <a class="lab-method-link" href="projects/analytics-foundations/README.md">Read method <span aria-hidden="true">↗</span></a>
+          </div>
+
+          <div class="lab-summary">
+            <div class="lab-kpis" id="lab-kpis" aria-live="polite">
+              <article><span>Revenue</span><strong>€108,686</strong><small>After line-level discount</small></article>
+              <article><span>Gross profit</span><strong>€44,335</strong><small>Revenue less unit cost</small></article>
+              <article><span>Gross margin</span><strong>40.8%</strong><small>Profit ÷ revenue</small></article>
+              <article><span>Orders</span><strong>477</strong><small>Distinct fictional orders</small></article>
+            </div>
+            <p class="lab-period-note" id="lab-period-note">2024-01-01 — 2025-08-23 · EUR · 477 orders · 240 fictional customers</p>
+          </div>
+
+          <div class="lab-chart-layout">
+            <div class="lab-chart-copy">
+              <p class="eyebrow">MEASURE / <span id="lab-chart-measure">REVENUE</span></p>
+              <h3 id="lab-chart-title">Revenue by product category</h3>
+              <p id="lab-chart-insight" class="lab-insight" aria-live="polite">Electronics is the largest category in this synthetic sample. The data generator deliberately sets the patterns being explored.</p>
+              <p class="lab-limitation"><strong>Read with care.</strong> Synthetic practice data—not real company activity, a forecast, or an industry benchmark.</p>
+            </div>
+            <figure class="lab-chart">
+              <svg id="lab-chart" viewBox="0 0 640 280" role="img" aria-label="Revenue by product category; synthetic practice data" preserveAspectRatio="xMidYMid meet">
+                <g aria-hidden="true">
+                  <line x1="145" y1="16" x2="145" y2="238" /><line x1="255" y1="16" x2="255" y2="238" />
+                  <line x1="365" y1="16" x2="365" y2="238" /><line x1="475" y1="16" x2="475" y2="238" />
+                  <line x1="585" y1="16" x2="585" y2="238" />
+                  <text x="145" y="262">€0</text><text x="255" y="262">€15k</text><text x="365" y="262">€30k</text>
+                  <text x="475" y="262">€45k</text><text x="585" y="262">€60k</text>
+                  <text class="chart-label" x="8" y="50">Accessories</text><rect class="chart-bar" x="145" y="31" width="64" height="24" rx="2" />
+                  <text class="chart-label" x="8" y="102">Electronics</text><rect class="chart-bar chart-bar-primary" x="145" y="83" width="438" height="24" rx="2" />
+                  <text class="chart-label" x="8" y="154">Home</text><rect class="chart-bar" x="145" y="135" width="175" height="24" rx="2" />
+                  <text class="chart-label" x="8" y="206">Office</text><rect class="chart-bar" x="145" y="187" width="119" height="24" rx="2" />
+                </g>
+              </svg>
+              <figcaption id="lab-chart-caption">Full-period revenue · grouped by product category</figcaption>
+            </figure>
+          </div>
+
+          <div class="lab-table-wrap">
+            <table class="lab-table">
+              <caption>Underlying grouped measures · EUR</caption>
+              <thead><tr><th scope="col">Group</th><th scope="col">Revenue</th><th scope="col">Gross profit</th></tr></thead>
+              <tbody id="lab-table-body">
+                <tr><th scope="row">Accessories</th><td>€8,801</td><td>€5,415</td></tr>
+                <tr><th scope="row">Electronics</th><td>€59,723</td><td>€17,446</td></tr>
+                <tr><th scope="row">Home</th><td>€23,913</td><td>€12,628</td></tr>
+                <tr><th scope="row">Office</th><td>€16,248</td><td>€8,846</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="lab-workflow">
+            <span><b>01</b> Ask</span><span><b>02</b> Check</span><span><b>03</b> Analyze</span><span><b>04</b> Explain</span>
+            <p>Practice workflow: validate required fields and unique order IDs, define measures, compare a segment, then state what the sample cannot prove.</p>
+          </div>
+        </div>
+        <p class="lab-source">SOURCE: <a href="projects/analytics-foundations/data/retail_orders.csv">generated retail_orders.csv</a> · deterministic project summary · <a href="projects/analytics-foundations/README.md">definitions & limitations</a></p>
+      </div>
+    </section>
+
     <section class="section about-section" id="about">
       <div class="container about-layout">
         <div class="section-heading">
@@ -124,6 +216,10 @@
           <p>I’ve completed IBM’s Introduction to Data Analytics course and created Power BI dashboard projects as part of my learning. I’m now building depth step by step: asking better questions, working carefully with data, and communicating what the numbers can—and cannot—tell us.</p>
           <p>My computer science degree and earlier AI/ML projects give me useful technical breadth. Data analysis and business intelligence are my primary career direction; the engineering projects below are supporting evidence, not a replacement for that goal.</p>
           <p>This portfolio shares my current work honestly. It is a starting point in a longer learning path, not a claim of years of professional experience.</p>
+          <aside class="foundation-note" aria-label="Analytics learning foundation">
+            <span class="foundation-mark">IBM</span>
+            <p><strong>My analytics foundation</strong><br />IBM Introduction to Data Analytics · course completed<br /><small>This is the introductory course, not the full IBM Data Analyst Professional Certificate.</small></p>
+          </aside>
           <a class="inline-link" href="#background">See my education and training <span aria-hidden="true">↘</span></a>
         </div>
       </div>
@@ -392,5 +488,6 @@
       <a href="#home">BACK TO TOP ↑</a>
     </div>
   </footer>
+  <script src="showcase.js" defer></script>
 </body>
 </html>
