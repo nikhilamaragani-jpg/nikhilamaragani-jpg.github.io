@@ -4,8 +4,8 @@ An early-career portfolio focused on data analysis and business intelligence, su
 
 ## Portfolio contents
 
-- `index.html` — responsive portfolio website
-- `styles.css` — site design and responsive layout
+- `index.html` — responsive portfolio website with an accessible SVG chart of the synthetic retail sample
+- `styles.css` — editorial visual system, responsive layout, and reduced-motion-aware chart treatment
 - `assets/images/` — profile image carried forward from the original portfolio
 - `assets/powerbi-dashboards.pdf` — original two-page dashboard PDF supplied by the author
 - `projects/analytics-foundations/` — two reproducible foundational analytics case studies and dashboards
