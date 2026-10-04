@@ -153,10 +153,12 @@ h1 span { color: var(--green); font-family: var(--serif); font-weight: 400; font
 .skills-section { background: var(--paper-deep); }
 .section-description { max-width: 420px; color: var(--muted); }
 .skill-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: 2.8rem; background: #cbd4cc; border: 1px solid #cbd4cc; }
-.skill-card { min-height: 230px; padding: 1.45rem; background: var(--paper-deep); }
+.skill-card { display: flex; min-height: 270px; flex-direction: column; align-items: flex-start; padding: 1.45rem; background: var(--paper-deep); }
 .skill-number { color: var(--green); font: 500 .7rem var(--mono); }
 .skill-card h3 { margin: 2.3rem 0 .55rem; font-size: 1.1rem; letter-spacing: -.025em; }
-.skill-card p { min-height: 76px; margin-bottom: 1.1rem; color: var(--muted); font-size: .83rem; }
+.skill-card p { flex: 1; margin-bottom: .7rem; color: var(--muted); font-size: .83rem; }
+.skill-evidence { margin-bottom: .8rem; color: var(--green); font-size: .72rem; font-weight: 700; }
+.skill-evidence:hover { text-decoration: underline; text-underline-offset: 3px; }
 .skill-status { color: var(--green); font-size: .59rem; }
 
 .credential-section { background: var(--white); }
