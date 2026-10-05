@@ -154,7 +154,7 @@
     },
     {
       "month": "2018-09",
-      "revenue": 145.0,
+      "revenue": 145,
       "orders": 1
     }
   ],
@@ -555,9 +555,9 @@
     },
     {
       "payment_type": "not_defined",
-      "payment_value": 0.0,
+      "payment_value": 0,
       "orders": 3,
-      "share_pct": 0.0
+      "share_pct": 0
     }
   ],
   "review_delivery": [
@@ -617,5 +617,43 @@
     "Prioritize operational review for SP because it is the highest-revenue customer state; compare demand with its delivery performance before changing capacity.",
     "Use repeat-customer analysis to identify retention opportunities, but avoid treating descriptive segments as causal or predictive without further validation.",
     "Investigate late-delivery orders as a customer-experience risk because late orders have a lower observed review score; validate with additional operational data before making causal claims."
+  ],
+  "powerbi_insights": [
+    {
+      "title": "Revenue concentration",
+      "value": "Top 5 categories = 39.8% of revenue",
+      "evidence": "Health Beauty, Watches Gifts, Bed Bath Table, Sports Leisure and Computers Accessories together form the largest category revenue cluster.",
+      "powerbi_use": "Ranked bar chart + revenue share measure + category drill-through."
+    },
+    {
+      "title": "Geographic concentration",
+      "value": "Top 3 states = 63.4% of revenue",
+      "evidence": "SP alone contributes about 38.3% of revenue and records 95.5% observed on-time delivery.",
+      "powerbi_use": "Map/bar comparison + conditional formatting + state drill-through."
+    },
+    {
+      "title": "Retention opportunity",
+      "value": "Repeat-customer rate = 3.04%",
+      "evidence": "The observed customer base is dominated by one-time purchasers; RFM segments are descriptive, not predictive.",
+      "powerbi_use": "Repeat-rate KPI + segment slicer + customer/revenue share comparison."
+    },
+    {
+      "title": "Delivery and experience",
+      "value": "On-time vs late review gap = 2.02 points",
+      "evidence": "93.2% of qualifying delivered orders are on time; late orders average about 2.26/5 review versus 4.28/5 for on-time orders.",
+      "powerbi_use": "Delay-severity matrix + tooltip detail + review comparison; association only."
+    },
+    {
+      "title": "Freight intensity",
+      "value": "Freight = 16.6% of merchandise revenue",
+      "evidence": "Observed freight value is R$2.24M; this is a logistics measure, not a profit or margin measure.",
+      "powerbi_use": "Freight-to-revenue KPI + category/state decomposition."
+    },
+    {
+      "title": "Payment mix",
+      "value": "Credit card = 78.3% of payment value",
+      "evidence": "Credit-card payment records dominate observed payment value; payment records are one-to-many at order level.",
+      "powerbi_use": "Payment mix visual with controlled payment grain."
+    }
   ]
 }
