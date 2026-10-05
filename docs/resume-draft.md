@@ -11,7 +11,7 @@ GitHub: https://github.com/nikhilamaragani-jpg
 
 ## Profile
 
-B.Tech Computer Science Engineering graduate building a career in data analytics and business intelligence. Completed IBM's *Introduction to Data Analytics* course and developed Power BI dashboards as learning/workshop projects. Building practical experience with SQL, Python, Pandas, KPI analysis, data visualization, and business-oriented communication through reproducible portfolio work.
+B.Tech Computer Science Engineering graduate building a career in Data Analytics and Business Intelligence. Completed IBM's *Introduction to Data Analytics — Course 1* and built reproducible portfolio work spanning SQL, Python/Pandas, Power BI, data quality, KPI analysis, visualization, and business-oriented communication.
 
 ## Skills
 
@@ -22,6 +22,13 @@ B.Tech Computer Science Engineering graduate building a career in data analytics
 - **Technical:** Git/GitHub, FastAPI, SQLite, Docker exposure through academic/technical projects
 
 ## Selected data analytics projects
+
+### E-Commerce Operations & Customer Intelligence — flagship real-data project
+
+- Analyzed the Olist Brazilian E-Commerce Public Dataset through an automated Python pipeline.
+- Generated validated baseline KPIs: R$13.49M merchandise revenue, 98,199 sales-eligible orders, 94,983 customers, 93.23% on-time delivery.
+- Built SQL business questions, customer/product/logistics/review analysis, an interactive web dashboard, and a Power BI handoff.
+- Clearly documents source grain, assumptions, limitations, and non-causal interpretation.
 
 ### Retail Sales & Profitability — self-directed foundational project
 
@@ -65,4 +72,4 @@ Graduated 2026 · CGPA 6.9 / 10
 ## Role preferences
 
 Junior Data Analyst · BI Analyst · Reporting Analyst  
-Target markets: Germany, Switzerland, and other European locations. Open to discussing relocation and sponsorship where available; verify role-specific work authorization requirements.
+Open to international Data Analyst, BI Analyst, and Reporting Analyst opportunities worldwide. Based in India; open to remote work and international relocation. Work authorization depends on the specific destination and employer.
