@@ -7,20 +7,24 @@ UNION ALL SELECT 'products', COUNT(*) FROM olist_products_dataset
 UNION ALL SELECT 'customers', COUNT(*) FROM olist_customers_dataset
 UNION ALL SELECT 'sellers', COUNT(*) FROM olist_sellers_dataset;
 
--- Check missing/invalid core fields.
-SELECT COUNT(*) AS orders_without_customer_id
-FROM olist_orders_dataset o
-JOIN olist_customers_dataset c ON o.customer_id = c.customer_id
-WHERE c.customer_id IS NULL;
+-- Key uniqueness checks.
+SELECT COUNT(*) AS duplicate_order_ids
+FROM (
+  SELECT order_id FROM olist_orders_dataset GROUP BY order_id HAVING COUNT(*) > 1
+) t;
 
+SELECT COUNT(*) AS duplicate_customer_ids
+FROM (
+  SELECT customer_id FROM olist_customers_dataset GROUP BY customer_id HAVING COUNT(*) > 1
+) t;
+
+-- Missing timestamps / invalid price values.
 SELECT COUNT(*) AS orders_with_missing_purchase_ts
 FROM olist_orders_dataset
 WHERE order_purchase_timestamp IS NULL;
 
-SELECT COUNT(*) AS non_positive_item_quantities
-FROM olist_order_items_dataset
-WHERE quantity <= 0;
-
 SELECT COUNT(*) AS non_positive_item_prices
 FROM olist_order_items_dataset
-WHERE price <= 0;
+WHERE price <= 0 OR price IS NULL;
+
+-- Important: order_items has order_item_id rows and does not contain a quantity field.
