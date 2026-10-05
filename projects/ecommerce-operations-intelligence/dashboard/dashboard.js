@@ -116,7 +116,7 @@ const money=new Intl.NumberFormat("en-US",{style:"currency",currency:"BRL",maxim
         tooltip.style.left=(e.clientX-rect.left+14)+"px";
         tooltip.style.top=(e.clientY-rect.top+14)+"px";
         tooltip.innerHTML="<strong>"+p.state+"</strong><span>Revenue "+money.format(p.revenue)+"</span><span>Orders "+number.format(p.orders)+"</span><span>On-time "+Number(p.on_time_rate_pct).toFixed(1)+"%</span>";
-        bars.forEach(b=>b.material.emissiveIntensity=b===hit.object?.35:.3);
+        bars.forEach(b=>b.material.emissiveIntensity=b===hit.object ? .35 : .3);
       }else{
         tooltip.style.display="none";
         bars.forEach(b=>b.material.emissiveIntensity=.3);
