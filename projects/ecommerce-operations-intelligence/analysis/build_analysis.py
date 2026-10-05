@@ -203,7 +203,7 @@ def build():
         "quality":quality,
         "monthly":monthly.to_dict(orient="records"),
         "categories":categories.head(12).round(2).to_dict(orient="records"),
-        "states":state.head(20).round(2).to_dict(orient="records"),
+        "states":state.round(2).to_dict(orient="records"),
         "payments":pay.round(2).to_dict(orient="records"),
         "review_delivery":review_delivery.round(2).to_dict(orient="records"),
         "rfm_segments":customer_orders.groupby("segment",as_index=False).agg(customers=("customer_unique_id","nunique"),revenue=("revenue","sum")).sort_values("revenue",ascending=False).round(2).to_dict(orient="records"),
