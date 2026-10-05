@@ -128,6 +128,10 @@ A reviewer should be able to understand:
 
 See `powerbi/report-spec.md` for the seven-page report design and `powerbi/dax-measures.md` for the core measure definitions. The final PBIX must be built and validated in Power BI Desktop.
 
+### 3D geographic precision
+
+The 3D view uses the analytical state-level dataset and geographic centroids rather than polygon boundaries. This keeps the visualization lightweight and reproducible while avoiding the false impression of administrative boundary precision. The 2D analytical charts remain the primary source for exact comparison; the 3D view is an interactive geographic exploration layer.
+
 ## Portfolio deliverables
 
 - Executive Power BI dashboard
