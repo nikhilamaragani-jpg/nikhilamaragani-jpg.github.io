@@ -73,7 +73,7 @@ Do not commit the original raw dataset unless the repository explicitly document
 - Interactive 2D map
 - Optional 3D geographic showcase
 
-## Analytical rules
+## Analytical rules\n\n**Important source-grain note:** the Olist order-items table uses `order_item_id` rows and does not provide a quantity field. Merchandise revenue is therefore calculated as the sum of `price` across eligible order lines, not `price × quantity`.\n
 
 Do not confuse transaction lines with orders.
 
@@ -109,9 +109,7 @@ ecommerce-operations-intelligence/
 
 ## Status
 
-**Stage:** Project specification and implementation scaffold.
-
-The analytical result values, charts, KPIs, and recommendations must be generated from the actual source data before publication.
+**Stage:** Automated real-data pipeline + interactive dashboard in repository.\n\nThe GitHub Actions workflow downloads the public source CSVs, runs `analysis/build_analysis.py`, validates the outputs, and commits the compact derived analytics used by the dashboard. The raw source data is not committed. Final Power BI work remains a local `.pbix` deliverable.
 
 ## Reproducibility target
 
@@ -126,7 +124,7 @@ A reviewer should be able to understand:
 8. what the final dashboard says
 9. what limitations remain
 
-## Portfolio deliverables
+## Live dashboard\n\n`dashboard/index.html` is the recruiter-facing analytical experience. It includes KPI cards, monthly revenue, category and state analysis, RFM segmentation, delivery/review analysis, recommendations, and a restrained 3D geographic showcase.\n\n## Portfolio deliverables
 
 - Executive Power BI dashboard
 - Sales/revenue analysis
