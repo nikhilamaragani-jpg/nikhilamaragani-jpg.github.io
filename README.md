@@ -75,7 +75,7 @@ https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce
 
 ## Supporting work
 
-The repository also contains clearly labeled foundational and academic work, including synthetic retail analytics and earlier Computer Science projects. Those items are supporting evidence and are not presented as professional client work.
+Earlier Computer Science and AI/ML projects remain available as supporting technical breadth. They are kept separate from the flagship analytics project and are not presented as professional client work.
 
 ## Author
 
@@ -83,4 +83,4 @@ Amaragani Nikhil Sai · B.Tech Computer Science Engineering
 
 GitHub: https://github.com/nikhilamaragani-jpg
 
-LinkedIn: https://www.linkedin.com/in/nikhil-sai-amaragani-219115382
+LinkedIn: https://www.linkedin.com/in/amaraganinikhilsai
