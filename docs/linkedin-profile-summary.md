@@ -2,32 +2,26 @@
 
 ## Headline
 
-Early-Career Data Analyst | Power BI | SQL & Python Foundations | IBM Introduction to Data Analytics | B.Tech CSE
+Data Analyst | Power BI | SQL | Python | Business Intelligence | Dashboard Analytics
 
 ## About
 
-I’m Amaragani Nikhil Sai, a B.Tech Computer Science Engineering graduate building toward a career as a Data Analyst Specialist.
+I’m Amaragani Nikhil Sai, an early-career Data Analyst and 2026 B.Tech Computer Science Engineering graduate building a practical analytics career around SQL, Python/Pandas, Power BI, DAX, data modeling, data quality, and business intelligence.
 
-I’ve completed IBM’s *Introduction to Data Analytics* course and created Power BI dashboards as part of my learning and workshop practice. I’m building my analyst toolkit through foundational projects in SQL, Python, data quality checks, KPI definitions, and dashboard communication.
+My flagship project is **E-Commerce Operations & Customer Intelligence**, a real-data Olist Brazilian E-Commerce case study that integrates Data Analyst and Power BI Analyst work. The project covers data quality, SQL, Python/Pandas, KPI engineering, semantic-model design, DAX, interactive dashboard filtering, customer/RFM analysis, logistics, customer experience, geography, insight communication, and QA.
 
-My current portfolio includes two reproducible exercises using fictional retail data: a sales and profitability dashboard, and a customer-retention cohort analysis. I also retain Power BI workshop dashboard examples and technical projects from my academic background in AI, machine learning, and software development. The portfolio labels learning work and synthetic data clearly.
+Verified project results include R$13.49M merchandise revenue across 98,199 sales-eligible orders, 94,983 unique customers, a 3.04% repeat-customer rate, 93.23% on-time delivery, and a 4.07/5 average review score.
 
-I’m interested in junior Data Analyst, BI Analyst, and reporting roles, particularly in Germany, Switzerland, and elsewhere in Europe. I’m open to discussing relocation and sponsorship where supported by the role and employer.
-
-I value careful analysis, honest interpretation, and clear communication—and I’m continuing to grow my practical experience one project at a time.
+The public dashboard is interactive and supports month range, category, state and metric context, click-to-filter analysis, customer intelligence, logistics/CX, geography, and data-quality views.
 
 ## Featured links
 
 - Portfolio: https://nikhilamaragani-jpg.github.io/
+- Interactive dashboard: https://nikhilamaragani-jpg.github.io/projects/ecommerce-operations-intelligence/dashboard/
 - GitHub: https://github.com/nikhilamaragani-jpg
-- Certificates and achievements: https://github.com/nikhilamaragani-jpg/certificates-achievements
-- IBM course credential: add the direct certificate URL
-- Power BI credential: add the exact issuer/title and credential URL
+- Flagship repository: https://github.com/nikhilamaragani-jpg/ecommerece-operations-customer-intelligence
+- IBM course credential: https://coursera.org/verify/E6Z1ON902KHZ
 
 ## Suggested keywords
 
-Data Analyst · Junior Data Analyst · Business Intelligence · Power BI · SQL · Python · Pandas · KPI Reporting · Data Visualization · Cohort Analysis · Dashboard Reporting
-
-## Before publishing
-
-Confirm the public website URL after deployment. Add direct certificate links and exact issuer names. Keep workshop and synthetic-data projects labeled as learning work.
+Data Analyst · Business Intelligence · Power BI · DAX · SQL · Python · Pandas · KPI Reporting · Data Visualization · Data Modeling · Dashboard Analytics
