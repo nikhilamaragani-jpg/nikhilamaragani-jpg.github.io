@@ -8,7 +8,7 @@
 - Power BI Analyst
 - Data & Reporting Assistant
 
-Use local-language equivalents where useful, especially for Germany and Switzerland.
+Use local-language equivalents where useful, especially for Germany, Switzerland, Europe, and international markets.
 
 ## Application preparation
 

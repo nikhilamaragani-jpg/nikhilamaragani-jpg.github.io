@@ -1,0 +1,23 @@
+# Final Publication Checklist
+
+- [ ] Download source data from the documented Olist source.
+- [ ] Record the current dataset terms/license.
+- [ ] Profile all source tables.
+- [ ] Validate primary/foreign-key relationships.
+- [ ] Document row grain.
+- [ ] Clean and type fields.
+- [ ] Recalculate all KPIs from source data.
+- [ ] Validate SQL results against Python.
+- [ ] Build Power BI model.
+- [ ] Validate DAX measures.
+- [ ] Build seven report pages.
+- [ ] Create 2D geographic view.
+- [ ] Create restrained 3D geographic visualization.
+- [ ] Write 5–10 evidence-based insights.
+- [ ] Separate observation from recommendation.
+- [ ] Document limitations.
+- [ ] Add dashboard screenshots.
+- [ ] Add live web dashboard.
+- [ ] Do not publish raw data if terms do not permit redistribution.
+- [ ] Do not claim professional/client experience.
+- [ ] Do not claim causal relationships from observational data.
