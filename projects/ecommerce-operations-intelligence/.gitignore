@@ -1,0 +1,8 @@
+raw/
+*.csv
+*.parquet
+*.duckdb
+*.db
+.ipynb_checkpoints/
+__pycache__/
+.venv/
