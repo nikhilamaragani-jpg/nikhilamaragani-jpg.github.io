@@ -1,198 +1,34 @@
-const money=new Intl.NumberFormat("en-US",{style:"currency",currency:"BRL",maximumFractionDigits:0});const number=new Intl.NumberFormat("en-US");const pct=new Intl.NumberFormat("en-US",{maximumFractionDigits:1});async function load(){const r=await fetch("data/summary.json");if(!r.ok)throw new Error("Analytics data has not been generated yet. Run the GitHub Actions workflow.");return r.json()}function setKpis(d){for(const [k,v] of Object.entries(d.kpis)){const e=document.querySelector('[data-kpi="'+k+'"]');if(!e)continue;if(["revenue","aov","freight_value"].includes(k))e.textContent=money.format(v);else if(k.endsWith("_pct"))e.textContent=pct.format(v)+"%";else if(k==="avg_review_score")e.textContent=Number(v).toFixed(2)+"/5";else e.textContent=number.format(v)}}function plot(id,t,l){Plotly.newPlot(id,[t],Object.assign({paper_bgcolor:"transparent",plot_bgcolor:"transparent",font:{color:"#33463d"},margin:{l:55,r:20,t:40,b:50}},l),{responsive:true,displayModeBar:false})}function renderCharts(d){plot("monthlyChart",{x:d.monthly.map(x=>x.month),y:d.monthly.map(x=>x.revenue),type:"scatter",mode:"lines",fill:"tozeroy",line:{color:"#176a52",width:3},fillcolor:"rgba(23,106,82,.13)"},{title:{text:"Monthly merchandise revenue",font:{size:18}},xaxis:{title:"Month"},yaxis:{title:"BRL"}});const cats=d.categories.slice(0,8).reverse();plot("categoryChart",{x:cats.map(x=>x.revenue),y:cats.map(x=>x.category),type:"bar",orientation:"h",marker:{color:"#176a52"}},{title:{text:"Top product categories by revenue",font:{size:18}},xaxis:{title:"BRL"},yaxis:{automargin:true}});const states=d.states.slice(0,10).reverse();plot("stateChart",{x:states.map(x=>x.revenue),y:states.map(x=>x.state),type:"bar",orientation:"h",marker:{color:"#7cab62"}},{title:{text:"Top customer states by revenue",font:{size:18}},xaxis:{title:"BRL"},yaxis:{automargin:true}});const r=d.rfm_segments;plot("rfmChart",{labels:r.map(x=>x.segment),values:r.map(x=>x.customers),type:"pie",hole:.58},{title:{text:"Observed customer segments",font:{size:18}},showlegend:true})}function renderInsights(d){document.getElementById("insightsList").innerHTML=d.insights.map(x=>"<li>"+x+"</li>").join("");document.getElementById("recommendations").innerHTML=d.recommendations.map((x,i)=>'<article class="recommendation"><span>RECOMMENDATION '+String(i+1).padStart(2,"0")+'</span><h3>Investigation priority</h3><p>'+x+'</p></article>').join("");const rows=d.review_delivery.map(x=>'<tr><td>'+x.delay_group+'</td><td>'+number.format(x.orders)+'</td><td>'+Number(x.avg_review).toFixed(2)+'</td></tr>').join("");document.getElementById("reviewTable").innerHTML='<table class="review-table"><thead><tr><th>Delivery group</th><th>Orders</th><th>Avg review</th></tr></thead><tbody>'+rows+"</tbody></table>"}function renderPowerBIInsights(d){const el=document.getElementById("powerbiInsights");if(!el||!Array.isArray(d.powerbi_insights))return;el.innerHTML=d.powerbi_insights.map((x,i)=>'<article class="powerbi-card"><div class="powerbi-index">INSIGHT '+String(i+1).padStart(2,"0")+'</div><h3>'+x.title+'</h3><strong>'+x.value+'</strong><p>'+x.evidence+'</p><span><b>POWER BI USE</b>'+x.powerbi_use+'</span></article>').join("")}
-function init3D(d){
-  const el=document.getElementById("threeContainer");
-  const detailState=document.getElementById("threeDetailState");
-  const detailRevenue=document.getElementById("detailRevenue");
-  const detailOrders=document.getElementById("detailOrders");
-  const detailOnTime=document.getElementById("detailOnTime");
-  const detailReview=document.getElementById("detailReview");
-  const metricButtons=[...document.querySelectorAll("[data-3d-metric]")];
-
-  const W=Math.max(el.clientWidth,320), H=Math.max(el.clientHeight,460);
-  const scene=new THREE.Scene();
-  const camera=new THREE.PerspectiveCamera(38,W/H,.1,1000);
-  const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
-  renderer.setSize(W,H);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
-  if("outputColorSpace" in renderer) renderer.outputColorSpace=THREE.SRGBColorSpace;
-  el.innerHTML="";
-  el.appendChild(renderer.domElement);
-
-  const group=new THREE.Group();
-  scene.add(group);
-
-  const pts=d.states.filter(x=>Number.isFinite(x.lat)&&Number.isFinite(x.lon)&&x.revenue>0);
-  const refLat=pts.reduce((sum,p)=>sum+p.lat,0)/pts.length;
-  const cosRef=Math.cos(refLat*Math.PI/180);
-  const geoPts=pts.map(p=>({...p,x:p.lon*cosRef,z:-p.lat}));
-
-  const minX=Math.min(...geoPts.map(p=>p.x)), maxX=Math.max(...geoPts.map(p=>p.x));
-  const minZ=Math.min(...geoPts.map(p=>p.z)), maxZ=Math.max(...geoPts.map(p=>p.z));
-  const geoW=Math.max(maxX-minX,1), geoH=Math.max(maxZ-minZ,1);
-  const targetH=26;
-  const targetW=Math.max(22,targetH*(geoW/geoH));
-  const sx=targetW/geoW, sz=targetH/geoH;
-  const maxValues={
-    revenue:Math.max(...geoPts.map(p=>p.revenue)),
-    orders:Math.max(...geoPts.map(p=>p.orders)),
-    on_time_rate_pct:100,
-    avg_review:5
-  };
-
-  const floor=new THREE.Mesh(
-    new THREE.PlaneGeometry(targetW+3,targetH+3),
-    new THREE.MeshStandardMaterial({color:0x17382f,roughness:.92,metalness:.03})
-  );
-  floor.rotation.x=-Math.PI/2;
-  floor.position.y=-2.25;
-  group.add(floor);
-
-  const grid=new THREE.GridHelper(Math.max(targetW,targetH)+3,18,0x365a4f,0x25483f);
-  grid.scale.set(targetW/(Math.max(targetW,targetH)+3),1,targetH/(Math.max(targetW,targetH)+3));
-  grid.position.y=-2.2;
-  group.add(grid);
-
-  const bars=[];
-  const labels=[];
-
-  geoPts.forEach(p=>{
-    const px=(p.x-(minX+maxX)/2)*sx;
-    const pz=(p.z-(minZ+maxZ)/2)*sz;
-    const geo=new THREE.BoxGeometry(.74,1,.74);
-    const mat=new THREE.MeshStandardMaterial({
-      color:0xc7f27c,
-      emissive:0x163d2d,
-      emissiveIntensity:.22,
-      roughness:.55
-    });
-    const mesh=new THREE.Mesh(geo,mat);
-    mesh.position.set(px,-1.7,pz);
-    mesh.userData=p;
-    group.add(mesh);
-    bars.push(mesh);
-
-    const canvas=document.createElement("canvas");
-    canvas.width=256; canvas.height=64;
-    const ctx=canvas.getContext("2d");
-    ctx.font="600 30px Arial";
-    ctx.textAlign="center";
-    ctx.fillStyle="rgba(232,244,235,.9)";
-    ctx.fillText(p.state,128,42);
-    const texture=new THREE.CanvasTexture(canvas);
-    const spriteMat=new THREE.SpriteMaterial({map:texture,transparent:true,depthWrite:false});
-    const sprite=new THREE.Sprite(spriteMat);
-    sprite.scale.set(2.8,.7,1);
-    sprite.position.set(px,-1.15,pz);
-    sprite.visible=false;
-    group.add(sprite);
-    labels.push(sprite);
-  });
-
-  scene.add(new THREE.HemisphereLight(0xe2eee5,0x10261f,1.35));
-  const key=new THREE.DirectionalLight(0xffffff,1.9);
-  key.position.set(10,25,10);
-  scene.add(key);
-
-  const cameraTarget=new THREE.Vector3(0,0,0);
-  let currentMetric="revenue";
-  let dragging=false,lastX=0,lastY=0;
-
-  function metricValue(p){ return Number(p[currentMetric]||0); }
-  function metricLabel(){
-    return currentMetric==="revenue" ? "REVENUE" :
-      currentMetric==="orders" ? "ORDERS" :
-      currentMetric==="on_time_rate_pct" ? "ON-TIME DELIVERY" : "REVIEW SCORE";
-  }
-  function formatMetric(p){
-    const v=metricValue(p);
-    if(currentMetric==="revenue") return money.format(v);
-    if(currentMetric==="orders") return number.format(v);
-    if(currentMetric==="on_time_rate_pct") return Number(v).toFixed(1)+"%";
-    return Number(v).toFixed(2)+"/5";
-  }
-  function updateDetail(p){
-    if(!p) return;
-    detailState.textContent=p.state;
-    detailRevenue.textContent=money.format(p.revenue);
-    detailOrders.textContent=number.format(p.orders);
-    detailOnTime.textContent=Number(p.on_time_rate_pct).toFixed(1)+"%";
-    detailReview.textContent=p.avg_review==null?"—":Number(p.avg_review).toFixed(2)+"/5";
-  }
-  function updateScene(){
-    const maxV=maxValues[currentMetric];
-    bars.forEach((bar,i)=>{
-      const p=bar.userData;
-      const norm=Math.max(0,Math.min(1,metricValue(p)/(maxV||1)));
-      const h=1.25+Math.sqrt(norm)*8.8;
-      bar.scale.y=h;
-      bar.position.y=-2.1+h/2;
-      labels[i].position.y=-2.1+h+.9;
-      labels[i].visible=norm>.58;
-      bar.material.emissiveIntensity=.22;
-    });
-    document.getElementById("threeLegend").innerHTML=
-      "<span>3D GEOGRAPHIC EXPLORER</span><strong>Height = "+metricLabel()+"</strong><small>27 Brazilian states · Hover for data · Drag to rotate</small>";
-  }
-  function setMetric(metric){
-    currentMetric=metric;
-    metricButtons.forEach(b=>b.classList.toggle("active",b.dataset["3dMetric"]===metric));
-    updateScene();
-  }
-  metricButtons.forEach(b=>b.addEventListener("click",()=>setMetric(b.dataset["3dMetric"])));
-
-  el.addEventListener("pointerdown",e=>{
-    dragging=true;lastX=e.clientX;lastY=e.clientY;
-    el.setPointerCapture?.(e.pointerId);
-  });
-  el.addEventListener("pointerup",e=>{
-    dragging=false;el.releasePointerCapture?.(e.pointerId);
-  });
-  el.addEventListener("pointerleave",()=>dragging=false);
-
-  const raycaster=new THREE.Raycaster();
-  el.addEventListener("pointermove",e=>{
-    if(dragging){
-      group.rotation.y+=(e.clientX-lastX)*.006;
-      group.rotation.x=Math.max(-.14,Math.min(.12,group.rotation.x+(e.clientY-lastY)*.003));
-      lastX=e.clientX;lastY=e.clientY;
-      return;
-    }
-    const rect=el.getBoundingClientRect();
-    const mouse=new THREE.Vector2(
-      ((e.clientX-rect.left)/rect.width)*2-1,
-      -((e.clientY-rect.top)/rect.height)*2+1
-    );
-    raycaster.setFromCamera(mouse,camera);
-    const hit=raycaster.intersectObjects(bars,false)[0];
-    if(hit){
-      updateDetail(hit.object.userData);
-      bars.forEach(b=>b.material.emissiveIntensity=b===hit.object ? .55 : .22);
-    }else{
-      bars.forEach(b=>b.material.emissiveIntensity=.22);
-    }
-  });
-
-  // Keep the full map centered and framed at load/resize.
-  camera.position.set(0,20.5,34);
-  camera.lookAt(cameraTarget);
-  group.rotation.x=-.035;
-
-  updateDetail(pts.slice().sort((a,b)=>b.revenue-a.revenue)[0]);
-  updateScene();
-
-  function animate(){
-    requestAnimationFrame(animate);
-    if(!dragging)group.rotation.y+=.00045;
-    renderer.render(scene,camera);
-  }
-  animate();
-
-  const resize=()=>{
-    const w=Math.max(el.clientWidth,320),h=Math.max(el.clientHeight,460);
-    camera.aspect=w/h;
-    camera.updateProjectionMatrix();
-    camera.lookAt(cameraTarget);
-    renderer.setSize(w,h);
-  };
-  window.addEventListener("resize",resize);
-}load().then(d=>{setKpis(d);renderCharts(d);renderInsights(d);renderPowerBIInsights(d);init3D(d)}).catch(err=>{document.body.innerHTML='<main style="padding:5rem;font-family:system-ui"><h1>Project build pending</h1><p>'+err.message+'</p><p>Once the GitHub Actions pipeline completes, reload this page.</p></main>'});
+const money=new Intl.NumberFormat('en-US',{style:'currency',currency:'BRL',maximumFractionDigits:0});
+const money2=new Intl.NumberFormat('en-US',{style:'currency',currency:'BRL',maximumFractionDigits:2});
+const number=new Intl.NumberFormat('en-US');const one=new Intl.NumberFormat('en-US',{maximumFractionDigits:1});const two=new Intl.NumberFormat('en-US',{maximumFractionDigits:2});
+let summary=null,bi=null;let ctx={from:null,to:null,category:'ALL',state:'ALL',metric:'revenue'};let activeView='executive';
+const qs=s=>document.querySelector(s);const qsa=s=>[...document.querySelectorAll(s)];
+function sum(rows,key){return rows.reduce((a,r)=>a+(Number(r[key])||0),0)}
+function escapeHtml(s){return String(s).replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;','\'':'&#39;'}[c]))}
+function fmtMetric(v){return ctx.metric==='orders'?number.format(v):money.format(v)}function metricTitle(){return ctx.metric==='orders'?'Orders':ctx.metric==='freight_value'?'Freight value':'Merchandise revenue'}
+const DATA_BASE=location.hostname==='nikhilamaragani-jpg.github.io'?'https://raw.githubusercontent.com/nikhilamaragani-jpg/ecommerece-operations-customer-intelligence/main/dashboard/data/':'data/';
+async function loadData(){const a=await fetch(DATA_BASE+'summary.json');const b=await fetch(DATA_BASE+'interactive.json');if(!a.ok||!b.ok)throw new Error('The repository pipeline has not published the real-data interactive cube yet.');summary=await a.json();bi=await b.json();ctx.from=bi.months[0];ctx.to=bi.months[bi.months.length-1];buildFilters();bindUI();renderAll()}
+function buildFilters(){qs('#fromMonth').innerHTML=bi.months.map(v=>'<option value=\"'+escapeHtml(v)+'\">'+escapeHtml(v)+'</option>').join('');qs('#toMonth').innerHTML=bi.months.map(v=>'<option value=\"'+escapeHtml(v)+'\">'+escapeHtml(v)+'</option>').join('');qs('#fromMonth').value=ctx.from;qs('#toMonth').value=ctx.to;qs('#categoryFilter').innerHTML='<option value=\"ALL\">All categories</option>'+bi.categories.map(v=>'<option value=\"'+escapeHtml(v)+'\">'+escapeHtml(v)+'</option>').join('');qs('#stateFilter').innerHTML='<option value=\"ALL\">All states</option>'+bi.states.map(v=>'<option value=\"'+escapeHtml(v)+'\">'+escapeHtml(v)+'</option>').join('');}
+function syncControls(){qs('#fromMonth').value=ctx.from;qs('#toMonth').value=ctx.to;qs('#categoryFilter').value=ctx.category;qs('#stateFilter').value=ctx.state;qs('#metricFilter').value=ctx.metric}
+function bindUI(){['fromMonth','toMonth','categoryFilter','stateFilter','metricFilter'].forEach(id=>qs('#'+id).addEventListener('change',e=>{if(id==='fromMonth')ctx.from=e.target.value;if(id==='toMonth')ctx.to=e.target.value;if(id==='categoryFilter')ctx.category=e.target.value;if(id==='stateFilter')ctx.state=e.target.value;if(id==='metricFilter')ctx.metric=e.target.value;if(ctx.from>ctx.to){const t=ctx.from;ctx.from=ctx.to;ctx.to=t}renderAll()}));qs('#resetBtn').addEventListener('click',()=>{ctx={from:bi.months[0],to:bi.months[bi.months.length-1],category:'ALL',state:'ALL',metric:'revenue'};syncControls();renderAll();toast('Analytical context reset')});qsa('.tab').forEach(btn=>btn.addEventListener('click',()=>{activeView=btn.dataset.view;qsa('.tab').forEach(x=>x.classList.toggle('active',x===btn));qsa('.view').forEach(x=>x.classList.toggle('active',x.id==='view-'+activeView));renderAll()}));qs('#closeDrawer').addEventListener('click',closeDrawer)}
+function monthRows(){return bi.cube.filter(r=>r.month>=ctx.from&&r.month<=ctx.to&&(ctx.category==='ALL'||r.category===ctx.category)&&(ctx.state==='ALL'||r.state===ctx.state))}
+function categoryRows(){return bi.cube.filter(r=>r.month>=ctx.from&&r.month<=ctx.to&&(ctx.state==='ALL'||r.state===ctx.state))}
+function stateRows(){return bi.cube.filter(r=>r.month>=ctx.from&&r.month<=ctx.to&&(ctx.category==='ALL'||r.category===ctx.category))}
+function aggregate(rows,key){const m=new Map();rows.forEach(r=>{const k=r[key];if(!m.has(k))m.set(k,{key:k,revenue:0,orders:0,freight_value:0,order_lines:0});const x=m.get(k);x.revenue+=Number(r.revenue)||0;x.orders+=Number(r.orders)||0;x.freight_value+=Number(r.freight_value)||0;x.order_lines+=Number(r.order_lines)||0});return [...m.values()].sort((a,b)=>(b[ctx.metric]||0)-(a[ctx.metric]||0))}
+function contextLabel(){const b=[];b.push(ctx.from===bi.months[0]&&ctx.to===bi.months[bi.months.length-1]?'Full historical period':ctx.from+' → '+ctx.to);if(ctx.category!=='ALL')b.push(ctx.category);if(ctx.state!=='ALL')b.push(ctx.state);return b.join(' · ')}
+function serviceContext(){if(ctx.category!=='ALL'&&ctx.state!=='ALL')return bi.service_cube.find(r=>r.category===ctx.category&&r.state===ctx.state)||null;if(ctx.category!=='ALL')return bi.service_category_summary.find(r=>r.category===ctx.category)||null;if(ctx.state!=='ALL')return bi.service_state_summary.find(r=>r.state===ctx.state)||null;return {on_time_rate_pct:summary.kpis.on_time_delivery_pct,avg_review:summary.kpis.avg_review_score,qualified_delivery_orders:sum(summary.review_delivery,'orders')}}
+function totals(){const r=monthRows(),revenue=sum(r,'revenue'),orders=sum(r,'orders'),freight=sum(r,'freight_value');return {revenue:revenue,orders:orders,freight:freight,aov:orders?revenue/orders:0,service:serviceContext()}}
+function layout(title){return {paper_bgcolor:'transparent',plot_bgcolor:'transparent',font:{color:'#23433a',family:'Inter,system-ui,sans-serif'},margin:{l:54,r:20,t:42,b:50},title:{text:title,font:{size:16,color:'#102b24'},x:0.02}}}
+function plot(id,traces,lay){Plotly.react(id,traces,Object.assign(layout(''),lay),{responsive:true,displayModeBar:false})}
+function renderAll(){syncControls();qs('#contextText').textContent=contextLabel();renderKPIs();renderExecutive();renderSales();renderCustomer();renderLogistics();renderGeography();renderQuality()}
+function renderKPIs(){const t=totals(),s=t.service;qs('#kpiRevenue').textContent=money.format(t.revenue);qs('#kpiOrders').textContent=number.format(t.orders);qs('#kpiAov').textContent=money2.format(t.aov);qs('#kpiFreight').textContent=money.format(t.freight);qs('#kpiOnTime').textContent=s&&s.on_time_rate_pct!=null?one.format(s.on_time_rate_pct)+'%':'—';qs('#kpiReview').textContent=s&&s.avg_review!=null?two.format(s.avg_review)+'/5':'—'}
+function renderExecutive(){const r=monthRows(),months=[...new Set(r.map(x=>x.month))].sort();const vals=months.map(m=>sum(r.filter(x=>x.month===m),ctx.metric));plot('execTrend',[{x:months,y:vals,type:'scatter',mode:'lines+markers',line:{color:'#176a52',width:3},fill:'tozeroy',fillcolor:'rgba(23,106,82,.10)'}],{title:{text:metricTitle()+' over time',x:0.02},xaxis:{title:'Month'},yaxis:{title:metricTitle()}});const cats=aggregate(categoryRows(),'category').slice(0,10).reverse();plot('execCategory',[{x:cats.map(x=>x[ctx.metric]),y:cats.map(x=>x.key),type:'bar',orientation:'h',marker:{color:'#176a52'}}],{title:{text:'Top categories in context',x:0.02},xaxis:{title:metricTitle()},yaxis:{automargin:true}});qs('#execCategory').on('plotly_click',ev=>{const v=ev.points&&ev.points[0]&&ev.points[0].y;if(v){ctx.category=v;renderAll();toast('Category filter applied: '+v)}});const states=aggregate(stateRows(),'state').slice(0,10).reverse();plot('execState',[{x:states.map(x=>x[ctx.metric]),y:states.map(x=>x.key),type:'bar',orientation:'h',marker:{color:'#8bbf70'}}],{title:{text:'Top states in context',x:0.02},xaxis:{title:metricTitle()},yaxis:{automargin:true}});qs('#execState').on('plotly_click',ev=>{const v=ev.points&&ev.points[0]&&ev.points[0].y;if(v){ctx.state=v;renderAll();toast('State filter applied: '+v)}});qs('#narrative').innerHTML='<div class="insight-line"><b>CURRENT CONTEXT</b><p>'+money.format(totals().revenue)+' across '+number.format(totals().orders)+' orders.</p></div><div class="insight-line"><b>RETENTION</b><p>Observed repeat-customer rate: '+summary.kpis.repeat_customer_rate_pct.toFixed(2)+'%. This is descriptive, not predictive.</p></div><div class="insight-line"><b>DELIVERY & EXPERIENCE</b><p>Late orders show lower observed reviews than on-time orders; the project treats this as an association, not proof of causality.</p></div><div class="insight-line"><b>BASELINE LEADERS</b><p>'+escapeHtml(summary.categories[0].category)+' leads category revenue; '+escapeHtml(summary.states[0].state)+' leads state revenue in the full-period baseline.</p></div>'}
+function renderSales(){qs('#salesMetricNote').textContent=metricTitle();const r=monthRows(),months=[...new Set(r.map(x=>x.month))].sort(),vals=months.map(m=>sum(r.filter(x=>x.month===m),ctx.metric));plot('salesTrend',[{x:months,y:vals,type:'bar',marker:{color:'#176a52'}}],{title:{text:metricTitle()+' by month',x:0.02},xaxis:{title:'Month'},yaxis:{title:metricTitle()}});const cats=aggregate(categoryRows(),'category').slice(0,12).reverse();plot('salesCategory',[{x:cats.map(x=>x[ctx.metric]),y:cats.map(x=>x.key),type:'bar',orientation:'h',marker:{color:'#8bbf70'}}],{title:{text:'Category ranking',x:0.02},xaxis:{title:metricTitle()},yaxis:{automargin:true}});qs('#salesCategory').on('plotly_click',ev=>{const v=ev.points&&ev.points[0]&&ev.points[0].y;if(v){ctx.category=v;renderAll();toast('Category filter applied: '+v)}});const t=totals();qs('#salesDetail').innerHTML=[['Revenue',money.format(t.revenue)],['Orders',number.format(t.orders)],['AOV',money2.format(t.aov)],['Freight',money.format(t.freight)],['Freight / revenue',t.revenue?(t.freight/t.revenue*100).toFixed(1)+'%':'—'],['Context',escapeHtml(contextLabel())]].map(x=>'<div><span>'+x[0]+'</span><strong>'+x[1]+'</strong></div>').join('')}
+function renderCustomer(){const r=summary.rfm_segments||[];plot('rfmChart',[{labels:r.map(x=>x.segment),values:r.map(x=>x.customers),type:'pie',hole:.62,textinfo:'label+percent'}],{title:{text:'Observed RFM customer mix',x:0.02},showlegend:false});qs('#rfmTable').innerHTML='<table><thead><tr><th>Segment</th><th>Customers</th><th>Customer share</th><th>Revenue</th><th>Revenue share</th></tr></thead><tbody>'+r.map(x=>'<tr><td>'+escapeHtml(x.segment)+'</td><td>'+number.format(x.customers)+'</td><td>'+one.format(x.customer_share_pct||x.customers/summary.kpis.customers*100)+'%</td><td>'+money.format(x.revenue)+'</td><td>'+one.format(x.revenue_share_pct||x.revenue/summary.kpis.revenue*100)+'%</td></tr>').join('')+'</tbody></table>';qs('#customerNarrative').innerHTML='<div class="big-readout"><strong>'+summary.kpis.repeat_customer_rate_pct.toFixed(2)+'%</strong><span>observed repeat-customer rate</span></div><div class="insight-line"><b>HOW TO READ IT</b><p>RFM is a descriptive segmentation layer. It supports prioritization and storytelling, not predictive churn claims.</p></div>'}
+function renderLogistics(){const rd=summary.review_delivery||[];plot('deliveryChart',[{x:rd.map(x=>x.delay_group),y:rd.map(x=>x.avg_review),type:'bar',marker:{color:'#176a52'},customdata:rd.map(x=>x.orders),hovertemplate:'%{x}<br>Avg review: %{y:.2f}/5<br>Orders: %{customdata:,}<extra></extra>'}],{title:{text:'Review score by delivery group',x:0.02},yaxis:{title:'Average review score',range:[0,5]}});const s=serviceContext();const ontime=s&&s.on_time_rate_pct!=null?s.on_time_rate_pct:summary.kpis.on_time_delivery_pct;const late=100-ontime;const lateOrders=summary.review_delivery.filter(x=>x.delay_group!=='On time').reduce((a,x)=>a+x.orders,0);const severe=summary.review_delivery.find(x=>x.delay_group==='8+ days late')?.orders||0;const onScore=summary.review_delivery.find(x=>x.delay_group==='On time')?.avg_review||4.28;const lateScore=summary.review_delivery.filter(x=>x.delay_group!=='On time').reduce((a,x)=>a+x.orders*x.avg_review,0)/Math.max(lateOrders,1);qs('#logOnTime').textContent=one.format(ontime)+'%';qs('#logLate').textContent=one.format(late)+'%';qs('#logSevere').textContent=one.format(severe/Math.max(lateOrders,1)*100)+'%';qs('#logGap').textContent=two.format(onScore-lateScore)+' pts';let rows;if(ctx.category!=='ALL')rows=ctx.state!=='ALL'?bi.service_cube.filter(x=>x.category===ctx.category&&x.state===ctx.state):bi.service_cube.filter(x=>x.category===ctx.category);else rows=ctx.state!=='ALL'?bi.service_state_summary.filter(x=>x.state===ctx.state):bi.service_state_summary;rows=rows.sort((a,b)=>(b.on_time_rate_pct||0)-(a.on_time_rate_pct||0)).slice(0,12).reverse();plot('deliveryStateChart',[{x:rows.map(x=>x.on_time_rate_pct),y:rows.map(x=>x.state||x.category),type:'bar',orientation:'h',marker:{color:'#8bbf70'},customdata:rows.map(x=>[x.orders,x.avg_review]),hovertemplate:'%{y}<br>On-time: %{x:.1f}%<br>Orders: %{customdata[0]:,}<br>Review: %{customdata[1]:.2f}/5<extra></extra>'}],{title:{text:'On-time delivery by context',x:0.02},xaxis:{title:'On-time %',range:[0,100]},yaxis:{automargin:true}});qs('#logNarrative').innerHTML='<div class="insight-line"><b>OBSERVED SERVICE LEVEL</b><p>'+one.format(ontime)+'% of the current service context is on time.</p></div><div class="insight-line"><b>EXPERIENCE SIGNAL</b><p>On-time orders average about '+onScore.toFixed(2)+'/5 review versus about '+lateScore.toFixed(2)+'/5 for late orders in the full delivery population.</p></div><div class="insight-line"><b>CAUTION</b><p>The relationship is observational. No causal effect is claimed.</p></div>'}
+function renderGeography(){const rows=aggregate(stateRows(),'state');const sm=new Map();if(ctx.category!=='ALL')bi.service_cube.filter(x=>x.category===ctx.category).forEach(x=>sm.set(x.state,x));else bi.service_state_summary.forEach(x=>sm.set(x.state,x));const data=rows.map(x=>Object.assign({},x,sm.get(x.key)||{})).sort((a,b)=>b.revenue-a.revenue);plot('geoMatrix',[{x:data.map(x=>x.revenue),y:data.map(x=>x.key),type:'bar',orientation:'h',marker:{color:data.map(x=>(Number(x.on_time_rate_pct)>=93?'#7cab62':'#d8a44e'))},customdata:data.map(x=>[x.orders,x.on_time_rate_pct,x.avg_review]),hovertemplate:'%{y}<br>Revenue: R$%{x:,.0f}<br>Orders: %{customdata[0]:,}<br>On-time: %{customdata[1]:.1f}%<br>Review: %{customdata[2]:.2f}/5<extra></extra>'}],{title:{text:'State revenue with operating-quality context',x:0.02},xaxis:{title:'Revenue'},yaxis:{automargin:true}});qs('#geoMatrix').on('plotly_click',ev=>{const v=ev.points&&ev.points[0]&&ev.points[0].y;if(v){ctx.state=v;showDrawer('state',v);renderAll();toast('State filter applied: '+v)}});const selected=ctx.state==='ALL'?null:data.find(x=>x.key===ctx.state);qs('#selectedStateName').textContent=selected?.key||'All states';qs('#selectedStateStats').innerHTML=selected?[['Revenue',money.format(selected.revenue)],['Orders',number.format(selected.orders)],['On-time',selected.on_time_rate_pct!=null?one.format(selected.on_time_rate_pct)+'%':'—'],['Review',selected.avg_review!=null?two.format(selected.avg_review)+'/5':'—']].map(x=>'<div class="selected-stat"><span>'+x[0]+'</span><b>'+x[1]+'</b></div>').join(''):'<p>Select a state bar to open detail and apply the filter context.</p>';qs('#geoTable').innerHTML='<table><thead><tr><th>State</th><th>Revenue</th><th>Orders</th><th>On-time</th><th>Review</th></tr></thead><tbody>'+data.map(x=>'<tr data-state="'+escapeHtml(x.key)+'"><td>'+escapeHtml(x.key)+'</td><td>'+money.format(x.revenue)+'</td><td>'+number.format(x.orders)+'</td><td>'+((x.on_time_rate_pct!=null)?one.format(x.on_time_rate_pct)+'%':'—')+'</td><td>'+((x.avg_review!=null)?two.format(x.avg_review)+'/5':'—')+'</td></tr>').join('')+'</tbody></table>';qsa('#geoTable tr[data-state]').forEach(tr=>tr.addEventListener('click',()=>{ctx.state=tr.dataset.state;showDrawer('state',tr.dataset.state);renderAll()}))}
+function renderQuality(){const q=summary.quality;const checks=[['Orders rows',q.orders_rows],['Order-item rows',q.order_items_rows],['Customers rows',q.customers_rows],['Products rows',q.products_rows],['Reviews rows',q.reviews_rows],['Payments rows',q.payments_rows],['Duplicate order IDs',q.duplicate_order_ids],['Duplicate customer IDs',q.duplicate_customer_ids],['Missing customer IDs in orders',q.missing_customer_id_in_orders],['Missing product categories',q.missing_product_category],['Missing review scores',q.missing_review_score],['Missing delivered dates',q.missing_delivered_date],['Non-positive price lines',q.negative_or_zero_price_lines],['Canceled orders',q.canceled_orders]];qs('#qualityChecks').innerHTML=checks.map(x=>'<div class="quality-row"><span>'+x[0]+'</span><b>'+number.format(x[1])+'</b></div>').join('')}
+function showDrawer(type,value){if(type!=='state')return;const rows=stateRows().filter(x=>x.state===value),t={revenue:sum(rows,'revenue'),orders:sum(rows,'orders'),freight:sum(rows,'freight_value')},s=bi.service_state_summary.find(x=>x.state===value)||{};qs('#drawerBody').innerHTML='<p class="eyebrow">STATE DETAIL</p><h3>'+escapeHtml(value)+'</h3><div class="drawer-stats">'+[['Revenue',money.format(t.revenue)],['Orders',number.format(t.orders)],['Freight',money.format(t.freight)],['On-time',s.on_time_rate_pct!=null?one.format(s.on_time_rate_pct)+'%':'—'],['Avg review',s.avg_review!=null?two.format(s.avg_review)+'/5':'—']].map(x=>'<div><span>'+x[0]+'</span><b>'+x[1]+'</b></div>').join('')+'</div><p>Use this state as the active filter context across Executive, Sales, Logistics and Geography.</p>';qs('#drillDrawer').classList.add('open');qs('#drillDrawer').setAttribute('aria-hidden','false')}
+function closeDrawer(){qs('#drillDrawer').classList.remove('open');qs('#drillDrawer').setAttribute('aria-hidden','true')}
+function toast(msg){const e=qs('#toast');e.textContent=msg;e.classList.add('show');clearTimeout(window.__toast);window.__toast=setTimeout(()=>e.classList.remove('show'),2200)}
+loadData().catch(err=>{document.body.innerHTML='<main class=\"error-page\"><h1>Analytics build pending</h1><p>'+escapeHtml(err.message)+'</p><p>Reload after GitHub Actions publishes the real-data interactive cube.</p></main>'});
