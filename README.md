@@ -54,7 +54,7 @@ Project: projects/ecommerce-operations-intelligence/README.md
 
 Source dataset: https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce
 
-**Important:** The raw source data is not committed by default. Final KPI values and insights will be calculated from the source dataset before publication.
+**Important:** The raw source data is not committed by default. The published dashboard uses generated analytical outputs from the documented reproducible pipeline; final Power BI work remains a local PBIX deliverable.
 
 ## Learning-to-portfolio rule
 
@@ -62,7 +62,7 @@ The portfolio mirrors the roadmap:
 
 **Course learning → practice → same-domain application → project evidence → GitHub → interview practice**
 
-The current roadmap prioritizes the IBM Data Analyst foundation, SQL depth, Power BI/PL-300, advanced analytics, applied GenAI, cloud analytics, and dbt before the later Data Engineering branch.
+The roadmap prioritizes the IBM Data Analyst foundation, deeper SQL and Power BI/PL-300, advanced analytics, applied GenAI, cloud analytics, and dbt before the later Data Engineering branch.
 
 ## Existing work
 
