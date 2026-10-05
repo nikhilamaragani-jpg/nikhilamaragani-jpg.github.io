@@ -10,7 +10,7 @@ Based in India · Open to remote, relocation, and international opportunities.
 
 This portfolio follows a focused progression:
 
-**Data Analyst Specialist → BI / Power BI Analyst → Analytical Analytics → Cloud Analytics → Analytics Engineering → Data Engineering**
+**Data Analyst Specialist → BI / Power BI Analyst → Advanced Analytics → Cloud Analytics → Analytics Engineering → Data Engineering**
 
 The primary specialist skills are:
 
@@ -81,4 +81,4 @@ Amaragani Nikhil Sai · B.Tech Computer Science Engineering
 
 GitHub: https://github.com/nikhilamaragani-jpg
 
-LinkedIn: https://www.linkedin.com/in/nikhil-sai-amaragani-219115382
+LinkedIn: https://www.linkedin.com/in/amaraganinikhilsai
