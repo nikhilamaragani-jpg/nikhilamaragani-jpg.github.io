@@ -2,18 +2,15 @@
 
 **Data Analyst | SQL | Power BI | Python | Business Intelligence**
 
-Open to international Data Analyst, BI Analyst, and reporting opportunities worldwide.
+Open to international Data Analyst, BI Analyst, and Reporting opportunities worldwide.
 
-Based in India · Open to remote, relocation, and international opportunities.
+## Portfolio direction
 
-## Portfolio architecture
-
-This portfolio follows a focused progression:
+The portfolio uses one primary specialist identity:
 
 **Data Analyst Specialist → BI / Power BI Analyst → Advanced Analytics → Cloud Analytics → Analytics Engineering → Data Engineering**
 
-The primary specialist skills are:
-
+Core analytics skills:
 - SQL
 - Excel
 - Python / Pandas / NumPy
@@ -21,59 +18,64 @@ The primary specialist skills are:
 - Power BI / Power Query / DAX
 - Data visualization
 - Business analytics
-- Predictive analytics
-- GenAI for analytics
-- BigQuery
-- dbt / analytics engineering foundations
+- Data quality
+- KPI design
 - Git / GitHub
 
-The portfolio is evidence-first: certificates support the profile, while GitHub projects demonstrate practical capability.
+The portfolio is evidence-first: learning milestones support the profile, while practical projects demonstrate capability.
 
 ## Flagship project
 
 ### E-Commerce Operations & Customer Intelligence
 
-A real-data junior Data Analyst case study using the Olist Brazilian E-Commerce Public Dataset.
+An integrated **Data Analyst + Power BI Analyst** case study built from the real Olist Brazilian E-Commerce Public Dataset.
 
-It demonstrates:
+The flagship project demonstrates:
 
-- Data quality and preparation
-- SQL joins and business questions
-- Python / pandas EDA
-- Dimensional data modeling
-- Power BI and DAX
-- Customer analytics
-- Product analytics
-- Logistics / delivery analysis
-- Customer review analysis
-- Geographic analytics
-- Business recommendations
-- Interactive 2D and restrained 3D visualization
+- Data profiling and quality validation
+- SQL business analysis
+- Python / Pandas analysis
+- Controlled analytical grain
+- KPI and metric governance
+- Semantic-model thinking
+- Power BI / DAX design
+- Interactive slicers and cross-filtering
+- Customer and RFM analysis
+- Product/category performance
+- Logistics and delivery analysis
+- Customer experience analysis
+- Geographic performance
+- Evidence-based recommendations
+- QA and reconciliation
 
-Project: projects/ecommerce-operations-intelligence/README.md
+### Verified baseline
 
-Source dataset: https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce
+| Metric | Observed |
+|---|---:|
+| Merchandise revenue | R$13.49M |
+| Sales-eligible orders | 98,199 |
+| Unique customers | 94,983 |
+| Average order value | R$137.42 |
+| Repeat-customer rate | 3.04% |
+| Average review score | 4.07 / 5 |
+| On-time delivery | 93.23% |
 
-**Important:** The raw source data is not committed by default. The published dashboard uses generated analytical outputs from the documented reproducible pipeline; final Power BI work remains a local PBIX deliverable.
+These figures describe the historical Olist dataset used in the project.
 
-## Learning-to-portfolio rule
+### Live project
 
-The portfolio mirrors the roadmap:
+**Interactive dashboard:**  
+projects/ecommerce-operations-intelligence/dashboard/index.html
 
-**Course learning → practice → same-domain application → project evidence → GitHub → interview practice**
+**Project documentation:**  
+projects/ecommerce-operations-intelligence/README.md
 
-The roadmap prioritizes the IBM Data Analyst foundation, deeper SQL and Power BI/PL-300, advanced analytics, applied GenAI, cloud analytics, and dbt before the later Data Engineering branch.
+**Source dataset:**  
+https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce
 
-## Existing work
+## Supporting work
 
-The repository also retains:
-
-- Foundational synthetic retail analytics
-- Customer cohort practice
-- Power BI workshop dashboards
-- Earlier Computer Science / AI/ML academic projects
-
-These are explicitly labeled by evidence level and are not presented as professional client work.
+The repository also contains clearly labeled foundational and academic work, including synthetic retail analytics and earlier Computer Science projects. Those items are supporting evidence and are not presented as professional client work.
 
 ## Author
 
@@ -81,4 +83,4 @@ Amaragani Nikhil Sai · B.Tech Computer Science Engineering
 
 GitHub: https://github.com/nikhilamaragani-jpg
 
-LinkedIn: https://www.linkedin.com/in/amaraganinikhilsai
+LinkedIn: https://www.linkedin.com/in/nikhil-sai-amaragani-219115382
