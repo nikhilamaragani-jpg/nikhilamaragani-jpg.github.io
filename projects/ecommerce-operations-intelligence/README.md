@@ -132,6 +132,29 @@ See `powerbi/report-spec.md` for the seven-page report design and `powerbi/dax-m
 
 The 3D view uses the analytical state-level dataset and geographic centroids rather than polygon boundaries. This keeps the visualization lightweight and reproducible while avoiding the false impression of administrative boundary precision. The 2D analytical charts remain the primary source for exact comparison; the 3D view is an interactive geographic exploration layer.
 
+## Power BI Analyst development
+
+The project now includes a dedicated Power BI Analyst layer designed to demonstrate practical BI delivery rather than only chart creation:
+
+- Controlled fact/dimension semantic model
+- Reusable DAX KPI layer
+- Eight-page report specification
+- Evidence-backed Power BI insight cards
+- Drill-through, tooltip and metric-selector interaction design
+- Conditional formatting and accessibility guidance
+- KPI reconciliation and data-quality QA checklist
+
+### Evidence-backed Power BI insights
+
+- Top five product categories: about 39.8% of merchandise revenue.
+- Top three customer states: about 63.4% of merchandise revenue.
+- Repeat-customer rate: 3.04%.
+- On-time delivery among qualifying orders: 93.23%.
+- Order-level review analysis shows a roughly 2.02-point gap between on-time and late orders in the delivery population; this is an association, not a causal estimate.
+- Freight value equals about 16.6% of merchandise revenue; this is not a profit or margin measure.
+
+[Power BI Analyst report](https://github.com/nikhilamaragani-jpg/ecommerece-operations-customer-intelligence/blob/main/docs/job-platform-project-report.md)
+
 ## Portfolio deliverables
 
 - Executive Power BI dashboard
