@@ -594,3 +594,19 @@ h1 span { color: var(--green); font-family: var(--serif); font-weight: 400; font
 .featured-project-card .tags span { border-color: rgba(255,255,255,.2); color:#dbe7dd; }
 .featured-project-card .inline-link { color: var(--green-bright); }
 @media (max-width: 700px) { .featured-project-grid { grid-template-columns: 1fr; } }
+
+
+/* Recruiter-first real-data hero */
+.real-project-card .signal-heading h2 { max-width: 360px; }
+.real-kpi-stack { display:grid; grid-template-columns:repeat(2,1fr); gap:1px; margin:1.2rem 0; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.12); }
+.real-kpi-stack > div { padding:.85rem; background:#17382f; }
+.real-kpi-stack span { display:block; font:500 .55rem var(--mono); letter-spacing:.08em; color:#9eb1a6; }
+.real-kpi-stack strong { display:block; margin-top:.2rem; color:#eef6ef; font-size:1.25rem; letter-spacing:-.04em; }
+.signal-bottomline { display:flex; justify-content:space-between; gap:1rem; align-items:center; margin-top:1rem; color:#b8c9bf; font:500 .57rem var(--mono); }
+.signal-bottomline a { color:var(--green-bright); text-decoration:none; white-space:nowrap; }
+.real-project-card figcaption { margin-top:.8rem; }
+@media (max-width: 700px) {
+  .real-kpi-stack { grid-template-columns:1fr 1fr; }
+  .signal-bottomline { display:block; }
+  .signal-bottomline a { display:inline-block; margin-top:.6rem; }
+}
