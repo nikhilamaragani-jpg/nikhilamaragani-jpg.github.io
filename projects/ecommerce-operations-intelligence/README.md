@@ -153,7 +153,7 @@ The project now includes a dedicated Power BI Analyst layer designed to demonstr
 - Order-level review analysis shows a roughly 2.02-point gap between on-time and late orders in the delivery population; this is an association, not a causal estimate.
 - Freight value equals about 16.6% of merchandise revenue; this is not a profit or margin measure.
 
-[Power BI Analyst report](https://github.com/nikhilamaragani-jpg/ecommerece-operations-customer-intelligence/blob/main/docs/job-platform-project-report.md)
+[Power BI Analyst report](POWERBI_ANALYST_REPORT.md)
 
 ## Portfolio deliverables
 
