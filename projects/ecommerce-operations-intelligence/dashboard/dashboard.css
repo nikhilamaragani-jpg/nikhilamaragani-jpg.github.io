@@ -14,3 +14,9 @@ table{width:100%;border-collapse:collapse;font-size:.75rem}th,td{padding:.65rem 
 #rfmChart{height:360px!important;min-height:360px}
 #execTrend,#execCategory,#execState,#deliveryChart,#deliveryStateChart,#salesCategory{overflow:hidden}
 .plotly-graph-div{width:100%!important}
+@media(max-width:760px){
+#execTrend,#execCategory,#execState,#salesTrend,#salesCategory,#rfmChart,#deliveryChart,#deliveryStateChart,#geoMatrix{height:270px!important;min-height:270px}
+#salesTrend,#geoMatrix{height:300px!important;min-height:300px}
+#rfmChart{height:290px!important;min-height:290px}
+.chart-panel,.chart-panel.large{min-height:325px}
+}
