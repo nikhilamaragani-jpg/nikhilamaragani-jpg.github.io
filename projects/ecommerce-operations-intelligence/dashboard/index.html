@@ -1,43 +1,195 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="E-Commerce Operations & Customer Intelligence — real-data Data Analyst case study by Amaragani Nikhil Sai.">
-<title>E-Commerce Operations & Customer Intelligence | Nikhil Sai</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="E-Commerce Operations & Customer Intelligence — interactive Data Analyst and Power BI Analyst case study.">
+<title>E-Commerce Operations & Customer Intelligence | Interactive BI Case Study</title>
 <link rel="stylesheet" href="dashboard.css">
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
-<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
 </head>
 <body>
-<header class="topbar"><a href="https://nikhilamaragani-jpg.github.io/" class="brand" target="_blank" rel="noreferrer">NA<span>.</span></a><div class="topmeta">REAL DATA · DATA ANALYST FLAGSHIP PROJECT</div><a href="../README.md" class="back">Repository ↗</a></header>
-<main>
-<section class="hero"><div><p class="eyebrow">E-COMMERCE OPERATIONS &amp; CUSTOMER INTELLIGENCE</p><h1>From messy transactions to <em>business decisions.</em></h1><p class="lead">A reproducible Data Analyst project using the anonymized Olist Brazilian e-commerce dataset to analyze revenue, customers, products, logistics, reviews and geography.</p><div class="tags"><span>SQL</span><span>PYTHON</span><span>POWER BI</span><span>DATA MODELING</span><span>VISUALIZATION</span></div></div><aside class="hero-note"><span>DATASET</span><strong>~100K orders</strong><small>Historical 2016–2018 public dataset</small></aside></section>
-<section class="kpis"><article><span>Revenue</span><strong data-kpi="revenue">—</strong><small>Merchandise revenue</small></article><article><span>Orders</span><strong data-kpi="orders">—</strong><small>Sales-eligible orders</small></article><article><span>Customers</span><strong data-kpi="customers">—</strong><small>Unique customers</small></article><article><span>AOV</span><strong data-kpi="aov">—</strong><small>Average order value</small></article><article><span>Repeat rate</span><strong data-kpi="repeat_customer_rate_pct">—</strong><small>Customers with &gt;1 order</small></article><article><span>On-time</span><strong data-kpi="on_time_delivery_pct">—</strong><small>Observed delivered orders</small></article></section>
-<section class="section"><div class="section-head"><div><p class="eyebrow">01 / EXECUTIVE OVERVIEW</p><h2>What the data says</h2></div><p>Every number is generated from the source data by the repository pipeline.</p></div><div class="grid two"><div class="panel chart-panel"><div id="monthlyChart"></div></div><div class="panel insights"><p class="panel-label">EVIDENCE-BASED INSIGHTS</p><ol id="insightsList"></ol></div></div></section>
-<section class="section"><div class="section-head"><div><p class="eyebrow">02 / MARKET &amp; PRODUCT</p><h2>Where performance concentrates</h2></div><p>Explore the strongest categories and customer states.</p></div><div class="grid two"><div class="panel chart-panel"><div id="categoryChart"></div></div><div class="panel chart-panel"><div id="stateChart"></div></div></div></section>
-<section class="section"><div class="section-head"><div><p class="eyebrow">03 / CUSTOMER INTELLIGENCE</p><h2>Value beyond the transaction</h2></div><p>Customer segmentation is descriptive: useful for analysis, not a claim of causality.</p></div><div class="grid two"><div class="panel chart-panel"><div id="rfmChart"></div></div><div class="panel review-panel"><p class="panel-label">REVIEW &amp; DELIVERY</p><div id="reviewTable"></div></div></div></section>
-<section class="section" id="powerbi-analyst-lens"><div class="section-head"><div><p class="eyebrow">04 / POWER BI ANALYST LENS</p><h2>From charts to analysis</h2></div><p>Report-ready insight cards generated from the same verified pipeline. Each card pairs an observed result with the Power BI visual or interaction that would communicate it.</p></div><div class="powerbi-grid" id="powerbiInsights"></div><div class="panel capability-panel"><p class="panel-label">POWER BI REPORT DESIGN</p><div class="capability-grid"><div><strong>Semantic model</strong><span>Separate order, item, payment and review facts with shared dimensions.</span></div><div><strong>DAX KPI layer</strong><span>Revenue, AOV, retention, delivery and freight measures with explicit filter logic.</span></div><div><strong>Interactive UX</strong><span>Purposeful slicers, metric switching, tooltips and state/category drill-through.</span></div><div><strong>Analytical QA</strong><span>Data-quality checks, grain rules, exclusion rules and documented limitations.</span></div></div><p class="capability-note">The repository contains the report specification and DAX definitions; the final PBIX still requires Power BI Desktop for build and validation.</p></div></section>
-<section class="section dark"><div class="section-head"><div><p class="eyebrow">05 / 3D GEOGRAPHIC SHOWCASE</p><h2>Market terrain</h2></div><p>3D is the interactive geographic exploration layer; it uses state centroids while the 2D charts remain the precise comparison layer.</p></div><div class="three-wrap">
-  <div class="three-toolbar" role="group" aria-label="3D metric selection">
-    <button type="button" class="three-metric active" data-3d-metric="revenue">Revenue</button>
-    <button type="button" class="three-metric" data-3d-metric="orders">Orders</button>
-    <button type="button" class="three-metric" data-3d-metric="on_time_rate_pct">On-time</button>
-    <button type="button" class="three-metric" data-3d-metric="avg_review">Review</button>
-  </div>
-  <div id="threeContainer"></div>
-  <div class="three-overlay" id="threeLegend"></div>
-  <aside class="three-detail" id="threeDetail" aria-live="polite">
-    <span class="three-detail-label">SELECT A STATE</span>
-    <strong id="threeDetailState">Hover a column</strong>
-    <div class="three-detail-grid">
-      <div><small>Revenue</small><b id="detailRevenue">—</b></div>
-      <div><small>Orders</small><b id="detailOrders">—</b></div>
-      <div><small>On-time</small><b id="detailOnTime">—</b></div>
-      <div><small>Review</small><b id="detailReview">—</b></div>
+<header class="topbar">
+  <div class="brand-wrap">
+    <a href="https://nikhilamaragani-jpg.github.io/" class="brand">NA<span>.</span></a>
+    <div>
+      <div class="topmeta">INTEGRATED DATA ANALYST × POWER BI ANALYST CASE STUDY</div>
+      <div class="topsub">REAL OLIST DATA · INTERACTIVE BI WORKSPACE</div>
     </div>
-    <small class="three-detail-note">3D height follows the selected metric. Exact values are also available in the 2D analysis.</small>
+  </div>
+  <div class="top-actions">
+    <button id="resetBtn" class="ghost-btn">Reset context</button>
+    <a href="https://github.com/nikhilamaragani-jpg/ecommerece-operations-customer-intelligence" target="_blank" rel="noreferrer" class="repo-link">Repository ↗</a>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div>
+    <p class="eyebrow">E-COMMERCE OPERATIONS &amp; CUSTOMER INTELLIGENCE</p>
+    <h1>One project.<br><em>Two analyst disciplines.</em></h1>
+    <p class="lead">A real-data portfolio case study that combines Data Analyst work — profiling, SQL, Python, KPIs and business insight — with Power BI Analyst work — semantic modeling, DAX, report interactions, drill-through, storytelling and QA.</p>
+    <div class="chips"><span>REAL DATA</span><span>SQL</span><span>PYTHON</span><span>POWER BI</span><span>DAX</span><span>DATA MODELING</span></div>
+  </div>
+  <aside class="hero-proof">
+    <span>VERIFIED BASELINE</span>
+    <strong>R$13.49M</strong>
+    <small>Merchandise revenue</small>
+    <div class="proof-grid">
+      <div><b>98.2K</b><span>orders</span></div>
+      <div><b>94.98K</b><span>customers</span></div>
+      <div><b>93.23%</b><span>on-time</span></div>
+      <div><b>4.07/5</b><span>review</span></div>
+    </div>
   </aside>
-</div></section>
-<section class="section"><div class="section-head"><div><p class="eyebrow">06 / RECOMMENDATIONS</p><h2>What I would investigate next</h2></div><p>Recommendations are generated from observed patterns and explicitly limited where the data cannot support causality.</p></div><div class="recommendations" id="recommendations"></div></section>
-<section class="section methodology"><div class="section-head"><div><p class="eyebrow">07 / METHOD</p><h2>How this was built</h2></div></div><div class="method-grid"><div><span>01</span><strong>Profile</strong><p>Validate row counts, duplicates, missing fields, invalid values, and table grain.</p></div><div><span>02</span><strong>Model</strong><p>Preserve order-line, order, customer and review grain to avoid double counting.</p></div><div><span>03</span><strong>Analyze</strong><p>Use SQL-style business questions plus Python/Pandas analytical transformations.</p></div><div><span>04</span><strong>Explain</strong><p>Separate observation, interpretation, recommendation, and limitation; never imply causality from this observational dataset.</p></div></div><p class="source">Source: Olist Brazilian E-Commerce Public Dataset · <a href="https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce" target="_blank" rel="noreferrer">Kaggle ↗</a> · <a href="../README.md">Full methodology ↗</a></p></section>
-</main><script src="dashboard.js"></script></body></html>
+</section>
+
+<section class="workspace">
+  <div class="context-bar">
+    <div class="context-title">
+      <span>FILTER CONTEXT</span>
+      <strong id="contextText">All data · full historical period</strong>
+    </div>
+    <div class="filters">
+      <label>From<select id="fromMonth"></select></label>
+      <label>To<select id="toMonth"></select></label>
+      <label>Category<select id="categoryFilter"><option value="ALL">All categories</option></select></label>
+      <label>State<select id="stateFilter"><option value="ALL">All states</option></select></label>
+      <label>Metric<select id="metricFilter"><option value="revenue">Revenue</option><option value="orders">Orders</option><option value="freight_value">Freight value</option></select></label>
+    </div>
+  </div>
+
+  <nav class="tabs" aria-label="Dashboard views">
+    <button class="tab active" data-view="executive">01 Executive</button>
+    <button class="tab" data-view="sales">02 Sales Explorer</button>
+    <button class="tab" data-view="customer">03 Customer Intelligence</button>
+    <button class="tab" data-view="logistics">04 Logistics & CX</button>
+    <button class="tab" data-view="geography">05 Geography</button>
+    <button class="tab" data-view="quality">06 QA & Method</button>
+  </nav>
+
+  <section class="view active" id="view-executive">
+    <div class="section-head">
+      <div><p class="eyebrow">01 / EXECUTIVE</p><h2>What is happening — and where?</h2></div>
+      <p class="view-note">Click a category or state bar to move the whole dashboard into that analytical context.</p>
+    </div>
+    <div class="kpi-grid">
+      <article class="kpi"><span>REVENUE</span><strong id="kpiRevenue">—</strong><small>Selected context</small></article>
+      <article class="kpi"><span>ORDERS</span><strong id="kpiOrders">—</strong><small>Distinct orders</small></article>
+      <article class="kpi"><span>AOV</span><strong id="kpiAov">—</strong><small>Revenue ÷ orders</small></article>
+      <article class="kpi"><span>FREIGHT</span><strong id="kpiFreight">—</strong><small>Observed logistics value</small></article>
+      <article class="kpi"><span>ON-TIME</span><strong id="kpiOnTime">—</strong><small>Qualified delivery population</small></article>
+      <article class="kpi"><span>REVIEW</span><strong id="kpiReview">—</strong><small>Observed average</small></article>
+    </div>
+    <div class="grid two">
+      <article class="panel chart-panel"><div class="panel-head"><span>PERFORMANCE TREND</span><button class="mini-btn" data-drill="trend">Explain</button></div><div id="execTrend"></div></article>
+      <article class="panel narrative"><div class="panel-head"><span>ANALYST NARRATIVE</span></div><div id="narrative"></div></article>
+    </div>
+    <div class="grid two">
+      <article class="panel chart-panel"><div class="panel-head"><span>REVENUE CONCENTRATION</span><small>click to filter</small></div><div id="execCategory"></div></article>
+      <article class="panel chart-panel"><div class="panel-head"><span>GEOGRAPHIC CONCENTRATION</span><small>click to filter</small></div><div id="execState"></div></article>
+    </div>
+    <div class="feature-strip">
+      <div><b>DATA ANALYST</b><span>Business question → data quality → SQL/Python → interpretation.</span></div>
+      <div><b>POWER BI ANALYST</b><span>Model → DAX → report interaction → insight → QA.</span></div>
+      <div><b>REPORTING VALUE</b><span>Decision-ready context instead of decorative charts.</span></div>
+    </div>
+  </section>
+
+  <section class="view" id="view-sales">
+    <div class="section-head">
+      <div><p class="eyebrow">02 / SALES EXPLORER</p><h2>Slice the commercial picture</h2></div>
+      <p class="view-note">The trend uses the real month × category × state analytical cube generated from the source tables.</p>
+    </div>
+    <div class="grid two">
+      <article class="panel chart-panel large"><div class="panel-head"><span>SELECTED METRIC OVER TIME</span><small id="salesMetricNote">Revenue</small></div><div id="salesTrend"></div></article>
+      <article class="panel chart-panel"><div class="panel-head"><span>TOP CATEGORIES IN CONTEXT</span></div><div id="salesCategory"></div></article>
+    </div>
+    <div class="panel detail-panel">
+      <div class="panel-head"><span>CONTEXT DETAIL</span><small>power-bi-style drill-through</small></div>
+      <div id="salesDetail" class="detail-grid"></div>
+    </div>
+  </section>
+
+  <section class="view" id="view-customer">
+    <div class="section-head">
+      <div><p class="eyebrow">03 / CUSTOMER INTELLIGENCE</p><h2>Retention beyond a single KPI</h2></div>
+      <p class="view-note">Customer and RFM metrics are descriptive full-period views; the project does not pretend they are predictive models.</p>
+    </div>
+    <div class="grid two">
+      <article class="panel chart-panel"><div class="panel-head"><span>RFM CUSTOMER SEGMENTS</span></div><div id="rfmChart"></div></article>
+      <article class="panel narrative"><div class="panel-head"><span>RETENTION READOUT</span></div><div id="customerNarrative"></div></article>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><span>SEGMENT ECONOMICS</span><small>full-period descriptive view</small></div>
+      <div id="rfmTable"></div>
+    </div>
+  </section>
+
+  <section class="view" id="view-logistics">
+    <div class="section-head">
+      <div><p class="eyebrow">04 / LOGISTICS &amp; CUSTOMER EXPERIENCE</p><h2>Where operations meet perception</h2></div>
+      <p class="view-note">Delivery and review findings are presented as observed associations, not causal claims.</p>
+    </div>
+    <div class="kpi-grid compact">
+      <article class="kpi"><span>ON-TIME RATE</span><strong id="logOnTime">—</strong><small>qualified orders</small></article>
+      <article class="kpi"><span>LATE RATE</span><strong id="logLate">—</strong><small>qualified orders</small></article>
+      <article class="kpi"><span>8+ DAY DELAYS</span><strong id="logSevere">—</strong><small>share of late orders</small></article>
+      <article class="kpi"><span>REVIEW GAP</span><strong id="logGap">—</strong><small>on-time vs late</small></article>
+    </div>
+    <div class="grid two">
+      <article class="panel chart-panel"><div class="panel-head"><span>DELIVERY SEVERITY → REVIEW</span></div><div id="deliveryChart"></div></article>
+      <article class="panel chart-panel"><div class="panel-head"><span>STATE DELIVERY PERFORMANCE</span><small>selected category/state context</small></div><div id="deliveryStateChart"></div></article>
+    </div>
+    <article class="panel narrative"><div class="panel-head"><span>INTERPRETATION</span></div><div id="logNarrative"></div></article>
+  </section>
+
+  <section class="view" id="view-geography">
+    <div class="section-head">
+      <div><p class="eyebrow">05 / GEOGRAPHY</p><h2>Market terrain, analytically controlled</h2></div>
+      <p class="view-note">The 2D state matrix is the precise comparison layer; the 3D view is the exploration layer.</p>
+    </div>
+    <div class="grid two">
+      <article class="panel chart-panel large"><div class="panel-head"><span>STATE PERFORMANCE MATRIX</span><small>click a state to filter</small></div><div id="geoMatrix"></div></article>
+      <article class="panel selected-card"><span>SELECTED STATE</span><strong id="selectedStateName">All states</strong><div id="selectedStateStats"></div></article>
+    </div>
+    <div class="panel geo-table-panel"><div class="panel-head"><span>STATE DETAIL</span><small>revenue · orders · on-time · review</small></div><div id="geoTable"></div></div>
+  </section>
+
+  <section class="view" id="view-quality">
+    <div class="section-head">
+      <div><p class="eyebrow">06 / QA &amp; METHOD</p><h2>How I keep dashboard numbers trustworthy</h2></div>
+      <p class="view-note">This is part of the analyst deliverable — not an appendix after the charts.</p>
+    </div>
+    <div class="grid two">
+      <article class="panel quality-panel"><div class="panel-head"><span>SOURCE DATA CHECKS</span></div><div id="qualityChecks"></div></article>
+      <article class="panel quality-panel"><div class="panel-head"><span>METRIC GOVERNANCE</span></div><div class="governance">
+        <div><b>1. Preserve grain</b><span>Orders, order lines, payments and reviews remain separate facts.</span></div>
+        <div><b>2. Define populations</b><span>Eligible sales and qualified delivery populations are explicit.</span></div>
+        <div><b>3. Reconcile</b><span>Power BI totals must match the SQL/Python baseline.</span></div>
+        <div><b>4. Communicate limits</b><span>No invented profit, prediction or causal claims.</span></div>
+      </div></article>
+    </div>
+    <article class="panel method-panel">
+      <div class="panel-head"><span>POWER BI ANALYST CAPABILITIES SHOWN</span></div>
+      <div class="cap-grid">
+        <div><b>Semantic modeling</b><span>FactOrder · FactOrderItem · FactPayment · FactReview + shared dimensions.</span></div>
+        <div><b>DAX / KPI design</b><span>Revenue, AOV, repeat rate, on-time, late rate, severe-delay share, freight ratio.</span></div>
+        <div><b>UX / interaction</b><span>Slicers, click-to-filter, tabs, drill-through style detail, metric switching.</span></div>
+        <div><b>Analytical storytelling</b><span>Each visual is paired with an observation, business meaning and caution.</span></div>
+        <div><b>Data quality</b><span>Duplicates, missing values, status exclusions and grain rules documented.</span></div>
+        <div><b>Recruiter evidence</b><span>Public live dashboard + GitHub code + downloadable project report.</span></div>
+      </div>
+    </article>
+  </section>
+</section>
+</main>
+
+<aside id="drillDrawer" class="drawer" aria-hidden="true">
+  <div class="drawer-head"><span>DRILL-THROUGH DETAIL</span><button id="closeDrawer">×</button></div>
+  <div id="drawerBody"></div>
+</aside>
+<div id="toast" class="toast" role="status"></div>
+<script src="dashboard.js"></script>
+</body>
+</html>
